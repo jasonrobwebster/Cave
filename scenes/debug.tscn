@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tiles/grasstiles/GrassTileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tiles/crystal/CrystalTimeMap.tscn" type="PackedScene" id=3]
+
+[node name="debug" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 74.6078, 71.0362 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="GrassTileMap" parent="." instance=ExtResource( 2 )]
+tile_data = PoolIntArray( 262154, 2, 3, 327684, 2, 3, 327690, 2, 65539, 393220, 2, 131076, 393221, 2, 2, 393225, 2, 0, 393226, 2, 131080, 393227, 2, 2, 458752, 2, 196608, 458753, 2, 7, 458756, 2, 65536, 458757, 2, 131077, 458758, 2, 1, 458759, 2, 1, 458760, 2, 1, 458761, 2, 131078, 458762, 2, 65537, 458763, 2, 131077, 458764, 2, 2, 524289, 2, 131075, 524292, 2, 131072, 524293, 2, 131073, 524294, 2, 131073, 524295, 2, 131073, 524296, 2, 131073, 524297, 2, 131073, 524298, 2, 131073, 524299, 2, 131073, 524300, 2, 196613, 524301, 2, 196609, 524302, 2, 196610 )
+
+[node name="CrystalTimeMap" parent="." instance=ExtResource( 3 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 74.6078, 71.0362 )
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
