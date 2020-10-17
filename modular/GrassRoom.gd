@@ -89,10 +89,13 @@ func get_class():
 	return "ModularRooms"
 
 
-func get_room_info(type: int) -> Dictionary:
+func get_room_info(type: int, force_player: bool = false) -> Dictionary:
 	var room_info: Dictionary = {"objects": [], "level": null, "bg": null}
 	var room_dir := get_child(type)
-	var index: int = _rng.randi_range(0, room_dir.get_child_count()-1)
+	var index = _rng.randi_range(0, room_dir.get_child_count()-1)
+	if force_player:
+		var player_indexes = _player_rooms[type]
+		index = player_indexes[_rng.randi() % player_indexes.size()]
 	var room_node := room_dir.get_child(index)
 	var level_tilemap: TileMap = room_node.get_node_or_null("Level")
 	var bg_tilemap: TileMap = room_node.get_node_or_null("Background")
