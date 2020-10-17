@@ -48,6 +48,7 @@ func _generate_level():
 	_place_rooms()
 	_place_walls()
 	_fill_empty()
+	_attach_camera_to_player()
 	emit_signal("level_finished")
 
 
@@ -136,6 +137,10 @@ func _fill_empty():
 	print(_empty_rooms)
 	for roomv in _empty_rooms:
 		_place_room(roomv)
+
+
+func _attach_camera_to_player():
+	_player.get_node("RemoteTransform2D").remote_path = $Camera2D.get_path()
 
 
 func _place_room(gridv: Vector2, incoming := [], outgoing := []):
