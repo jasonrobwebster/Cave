@@ -38,7 +38,7 @@ func _set_action_space(value):
 func size():
 	return _size
 
-func choose_action() -> Vector2:
+func choose_action():
 	var move_probability := []
 	var move_sum := 0.0
 	for i in range(_size):
