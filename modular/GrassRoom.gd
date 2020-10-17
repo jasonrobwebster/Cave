@@ -35,6 +35,56 @@ func _reset_player_rooms():
 	_player_rooms = {}
 	for type in Type.values():
 		_player_rooms[type] = []
+
+
+func get_valid_types(incoming: Array, outgoing: Array, 
+force_player: bool = false, allow_empty: bool = false) -> Array:
+	var valid_types := Type.values()
+	
+	for v in incoming:
+		match v:
+			Vector2.LEFT:
+				valid_types.erase(Type.L)
+			Vector2.RIGHT:
+				valid_types.erase(Type.R)
+			Vector2.UP:
+				valid_types.erase(Type.L)
+				valid_types.erase(Type.R)
+				valid_types.erase(Type.LR)
+				valid_types.erase(Type.LRT)
+			Vector2.DOWN:
+				valid_types.erase(Type.L)
+				valid_types.erase(Type.R)
+				valid_types.erase(Type.LR)
+				valid_types.erase(Type.LRB)
+				
+	for v in outgoing:
+		match v:
+			Vector2.LEFT:
+				valid_types.erase(Type.R)
+			Vector2.RIGHT:
+				valid_types.erase(Type.L)
+			Vector2.UP:
+				valid_types.erase(Type.L)
+				valid_types.erase(Type.R)
+				valid_types.erase(Type.LR)
+				valid_types.erase(Type.LRB)
+			Vector2.DOWN:
+				valid_types.erase(Type.L)
+				valid_types.erase(Type.R)
+				valid_types.erase(Type.LR)
+				valid_types.erase(Type.LRT)
+	
+	if force_player:
+		for type in valid_types:
+			if _player_rooms[type].empty(): valid_types.erase(type)
+	
+	if !allow_empty:
+		valid_types.erase(Type.Empty)
+	
+	return valid_types
+
+
 func get_class():
 	return "ModularRooms"
 
