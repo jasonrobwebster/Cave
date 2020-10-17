@@ -1,7 +1,7 @@
 extends Node2D
 class_name ModularRooms
 
-enum Type {Empty, R, L, LR, LRT, LRB}
+enum Type {R, L, LR, LRT, LRB, LRBT, Empty}
 
 export(Vector2) var room_size
 
