@@ -21,6 +21,7 @@ var _room_mask := [0, 0, 0, 0, 0, 0, 0]
 var _player_reached := false
 var _end_reached := false
 var _rng := RandomNumberGenerator.new()
+var _player: Node2D = null
 
 onready var _rooms: ModularRooms = ModularScene.instance()
 onready var _room_space := ActionSpace.new(
@@ -155,7 +156,12 @@ func _place_room(gridv: Vector2, incoming := [], outgoing := []):
 #			$Background.set_cellv(v + tile_offset, rm_level.get_cellv(v))
 	
 	for obj in room_info.objects:
-		if obj.is_in_group("player") and !in_player_room:
+		if obj.is_in_group("player"):
+			if !in_player_room:
+				continue
+			_player = obj.duplicate()
+			_player.global_position += obj_offset
+			$Objects.add_child(_player)
 			continue
 		elif obj.is_in_group("enemy") and in_player_room:
 			continue
