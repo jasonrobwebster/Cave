@@ -3,9 +3,8 @@
 [ext_resource path="res://player/player.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 4.5
-height = 3.0
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 3.5, 6 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Climb"
@@ -109,7 +108,9 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 6, 7 ]
 }
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -120,9 +121,8 @@ hframes = 6
 frame = 2
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -0.5, -6 )
-shape = SubResource( 1 )
+shape = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Climb = SubResource( 2 )
