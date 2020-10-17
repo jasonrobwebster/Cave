@@ -13,7 +13,4 @@ ModularScene = ExtResource( 2 )
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( -96, -80 )
-anchor_mode = 0
 current = true
-zoom = Vector2( 5, 5 )
