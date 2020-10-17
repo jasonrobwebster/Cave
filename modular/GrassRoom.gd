@@ -8,6 +8,27 @@ export(Vector2) var tile_size = Vector2(16, 16)
 export(int) var wall_id
 
 var _rng = RandomNumberGenerator.new()
+var _player_rooms: Dictionary = {}
+
+
+func _notification(what):
+	if what == NOTIFICATION_INSTANCED:
+		_get_player_rooms()
+
+
+func _get_player_rooms():
+	_reset_player_rooms()
+	var room_dir: Node2D
+	var room_node: Node2D
+	# not a big fan of the three for loops, but this will work for now
+	for room_type in Type.values():
+		room_dir = get_child(room_type)
+		for index in range(room_dir.get_child_count()):
+			room_node = room_dir.get_child(index)
+			for child in room_node.get_children():
+				if child.is_in_group("player"):
+					_player_rooms[room_type].push_back(index)
+					break
 
 
 func get_class():
