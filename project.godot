@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "ModularRooms",
 "language": "GDScript",
-"path": "res://modular/GrassRoom.gd"
+"path": "res://modular/ModularRooms.gd"
 }, {
 "base": "Node2D",
 "class": "RandomRoomWalker",
