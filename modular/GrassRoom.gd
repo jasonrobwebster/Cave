@@ -3,7 +3,9 @@ class_name ModularRooms
 
 enum Type {R, L, LR, LRT, LRB, LRBT, Empty}
 
-export(Vector2) var room_size
+export(Vector2) var room_size = Vector2(4, 4)
+export(Vector2) var tile_size = Vector2(16, 16)
+export(int) var wall_id
 
 var _rng = RandomNumberGenerator.new()
 
