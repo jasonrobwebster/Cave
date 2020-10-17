@@ -31,6 +31,10 @@ func _get_player_rooms():
 					break
 
 
+func _reset_player_rooms():
+	_player_rooms = {}
+	for type in Type.values():
+		_player_rooms[type] = []
 func get_class():
 	return "ModularRooms"
 
