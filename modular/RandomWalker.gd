@@ -181,7 +181,7 @@ in_player_room: bool) -> Dictionary:
 	var valid_types = _rooms.get_valid_types(incoming, outgoing, in_player_room)
 	
 	for type in valid_types:
-		mask[type] = 1	
+		mask[type] = 1
 	_room_space.set_mask(mask)
 	
 	var room_type: int = _room_space.choose_action()
