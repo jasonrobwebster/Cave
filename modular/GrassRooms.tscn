@@ -2,9 +2,7 @@
 
 [ext_resource path="res://tiles/grasstiles/GrassTileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://modular/GrassRoom.gd" type="Script" id=3]
-
-
+[ext_resource path="res://modular/ModularRooms.gd" type="Script" id=3]
 
 [node name="GrassRooms" type="Node2D"]
 script = ExtResource( 3 )
