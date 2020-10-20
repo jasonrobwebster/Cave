@@ -43,6 +43,16 @@ _global_script_classes=[ {
 "class": "RandomTileMap",
 "language": "GDScript",
 "path": "res://tiles/RandomTileMap.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://state_machine/state.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://state_machine/state_machine.gd"
 } ]
 _global_script_class_icons={
 "ActionSpace": "",
@@ -51,7 +61,9 @@ _global_script_class_icons={
 "Hurtbox": "",
 "ModularRooms": "",
 "RandomRoomWalker": "",
-"RandomTileMap": ""
+"RandomTileMap": "",
+"State": "",
+"StateMachine": ""
 }
 
 [application]
