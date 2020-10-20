@@ -4,10 +4,10 @@ extends Node
 # meant to be extended by other nodes
 
 # warning-ignore:unused_signal
-signal state_change(next_state)
+signal state_change(next_state, args)
 
 
-func enter():
+func enter(args = null):
 	# handle entering state
 	pass
 

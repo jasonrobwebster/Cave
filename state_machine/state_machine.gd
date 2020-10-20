@@ -51,11 +51,11 @@ func _assign_state_map():
 		state_map[child.name] = child
 
 
-func _change_state(state_name):
+func _change_state(state_name, args = null):
 	if not active:
 		return
 	current_state.exit()
 	current_state = state_map[state_name]
-	current_state.enter()
+	current_state.enter(args)
 	emit_signal("state_change", current_state)
 	
