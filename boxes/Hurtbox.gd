@@ -22,7 +22,6 @@ func _on_Timer_timeout():
 
 
 func _on_Hurtbox_area_entered(area: Hitbox):
-	owner.health -= area.damage
 	self.invincible = true
 
 
