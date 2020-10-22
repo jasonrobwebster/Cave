@@ -13,12 +13,12 @@ func _on_Hurtbox_area_entered(area: Hitbox):
 		self.health -= area.damage
 
 
-func set_health(value):
+func set_health(value: int):
 	health = clamp(value, 0, max_health)
 	emit_signal("health_changed", health)
 
 
-func set_maxhealth(value):
+func set_maxhealth(value: int):
 	max_health = max(0, value)
 	self.health = health
 	emit_signal("max_health_changed", max_health)
