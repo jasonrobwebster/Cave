@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://player/player.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
@@ -8,16 +8,19 @@
 [ext_resource path="res://player/Move.gd" type="Script" id=6]
 [ext_resource path="res://boxes/Hurtbox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://boxes/Hitbox.tscn" type="PackedScene" id=8]
+[ext_resource path="res://player/Hold.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1, 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3.5, 6 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "Climb"
+[sub_resource type="Animation" id=3]
 length = 0.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Pivot/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -29,12 +32,11 @@ tracks/0/keys = {
 "values": [ 18, 19 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Idle"
+[sub_resource type="Animation" id=4]
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Pivot/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -46,12 +48,11 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "JumpDown"
+[sub_resource type="Animation" id=5]
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Pivot/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -63,12 +64,11 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "JumpMid"
+[sub_resource type="Animation" id=6]
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Pivot/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -80,12 +80,11 @@ tracks/0/keys = {
 "values": [ 13 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "JumpUp"
+[sub_resource type="Animation" id=7]
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Pivot/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -97,12 +96,11 @@ tracks/0/keys = {
 "values": [ 14 ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "Walk"
+[sub_resource type="Animation" id=8]
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Pivot/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -114,12 +112,13 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 6, 7 ]
 }
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 3.5, 4 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
+collision_layer = 2
 script = ExtResource( 2 )
 max_health = 5
 
@@ -135,24 +134,43 @@ script = ExtResource( 6 )
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -8 )
+[node name="Hold" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+
+[node name="Pivot" type="Position2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Pivot"]
+position = Vector2( 0.5, -8 )
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 6
 frame = 8
 
-[node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, -6 )
+[node name="HoldTop" type="Area2D" parent="Pivot"]
+position = Vector2( -5, -11 )
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/HoldTop"]
 shape = SubResource( 1 )
 
+[node name="HoldBottom" type="Area2D" parent="Pivot"]
+position = Vector2( -5, -9 )
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/HoldBottom"]
+shape = SubResource( 1 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -6 )
+shape = SubResource( 2 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Climb = SubResource( 2 )
-anims/Idle = SubResource( 3 )
-anims/JumpDown = SubResource( 4 )
-anims/JumpMid = SubResource( 5 )
-anims/JumpUp = SubResource( 6 )
-anims/Walk = SubResource( 7 )
+anims/Climb = SubResource( 3 )
+anims/Idle = SubResource( 4 )
+anims/JumpDown = SubResource( 5 )
+anims/JumpMid = SubResource( 6 )
+anims/JumpUp = SubResource( 7 )
+anims/Walk = SubResource( 8 )
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -170,8 +188,12 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( -0.5, -7 )
-shape = SubResource( 8 )
+position = Vector2( 0, -7 )
+shape = SubResource( 9 )
+[connection signal="body_entered" from="Pivot/HoldTop" to="StateMachine/Jump" method="_on_HoldTop_body_entered"]
+[connection signal="body_exited" from="Pivot/HoldTop" to="StateMachine/Jump" method="_on_HoldTop_body_exited"]
+[connection signal="body_entered" from="Pivot/HoldBottom" to="StateMachine/Jump" method="_on_HoldBottom_body_entered"]
+[connection signal="body_exited" from="Pivot/HoldBottom" to="StateMachine/Jump" method="_on_HoldBottom_body_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="Hitbox"]

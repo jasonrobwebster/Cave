@@ -22,8 +22,7 @@ func update(delta):
 			input_x * MAX_MOVE_SPEED, 
 			ACCELRATION * fdelta
 		)
-		sprite.flip_h = input_x > 0
-		sprite.offset.x = - int(input_x > 0)
+		pivot.scale.x = -1 if input_x > 0 else 1
 	else:
 		velocity.x = move_toward(
 			velocity.x,

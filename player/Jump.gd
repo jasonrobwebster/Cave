@@ -3,6 +3,13 @@ extends "res://player/Motion.gd"
 const ACCELERATION := 1
 const FRICTION := 0
 const HOVER_SPEED := 30
+const HOLD_SPEED := 30
+
+var can_hold := false
+
+var _hold_bottom := false
+var _hold_top := false
+
 
 func enter(v: Vector2 = Vector2.ZERO):
 	velocity = v
@@ -27,6 +34,10 @@ func update(delta):
 	if owner.is_on_floor() and jump_speed <= 0:
 		emit_signal("state_change", "Move")
 	
+	if can_hold and jump_speed < HOVER_SPEED and owner.is_on_wall():
+		velocity = Vector2.ZERO
+		emit_signal("state_change", "Hold")
+	
 	var fdelta: float = delta * global.TARGET_FPS
 	var input_x := _get_input_x()
 	if input_x != 0:
@@ -35,8 +46,7 @@ func update(delta):
 			input_x * MAX_MOVE_SPEED, 
 			ACCELERATION * fdelta
 		)
-		sprite.flip_h = input_x > 0
-		sprite.offset.x = - int(input_x > 0)
+		pivot.scale.x = -1 if input_x > 0 else 1
 	else:
 		velocity.x = move_toward(
 			velocity.x,
@@ -44,3 +54,27 @@ func update(delta):
 			FRICTION * fdelta
 		)
 	.update(delta)
+
+
+func _update_hold():
+	can_hold = _hold_bottom and not _hold_top
+
+
+func _on_HoldBottom_body_entered(body):
+	_hold_bottom = true
+	_update_hold()
+
+
+func _on_HoldBottom_body_exited(body):
+	_hold_bottom = false
+	_update_hold()
+
+
+func _on_HoldTop_body_entered(body):
+	_hold_top = true
+	_update_hold()
+
+
+func _on_HoldTop_body_exited(body):
+	_hold_top = false
+	_update_hold()
