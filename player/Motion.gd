@@ -1,20 +1,15 @@
-extends State
+extends "res://player/PlayerState.gd"
 
 const TARGET_FPS := 60
 const MAX_FALL_SPEED := 400
 const MAX_MOVE_SPEED := 64
 const MAX_DECCELERATION := 50
 const AIR_ACC := 1
-const JUMP_FORCE := 170
+const JUMP_FORCE := 175
 const COYOTE_TIME := 0.1
 
 var _snap: bool
 var velocity: Vector2
-
-onready var sprite: Sprite = owner.get_node("Sprite")
-onready var anim_player: AnimationPlayer = owner.get_node("AnimationPlayer")
-onready var collision: CollisionShape2D = owner.get_node("Collision")
-onready var coyote_timer: Timer = owner.get_node("CoyoteTimer")
 
 
 func update(delta):
@@ -49,10 +44,3 @@ func _move():
 		-global.up_direction * float(_snap), 
 		global.up_direction
 	)
-
-
-func _get_input_x() -> float:
-	var input_right := Input.get_action_strength("ui_right")
-	var input_left := Input.get_action_strength("ui_left")
-	var input_x := input_right - input_left
-	return input_x
