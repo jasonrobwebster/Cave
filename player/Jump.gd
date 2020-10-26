@@ -1,6 +1,6 @@
 extends "res://player/Motion.gd"
 
-const ACCELERATION := 1
+const ACCELERATION := 5
 const FRICTION := 0
 const HOVER_SPEED := 30
 const HOLD_SPEED := 30
