@@ -31,11 +31,13 @@ onready var _room_space := ActionSpace.new(
 )
 
 signal level_finished
+signal player_placed(player)
 
 
 func _ready():
 	_rng.randomize()
 	connect("level_finished", $Level, "_build_tilemap_from_random_cells")
+	connect("player_placed", $CanvasLayer/PlayerUI, "set_player")
 	if _rooms.get_class() != "ModularRooms":
 		push_warning("variable 'Rooms' should be a 'ModularRooms' class")
 	_generate_level()
@@ -134,7 +136,6 @@ func _place_walls():
 
 
 func _fill_empty():
-	print(_empty_rooms)
 	for roomv in _empty_rooms:
 		_place_room(roomv)
 
@@ -167,6 +168,7 @@ func _place_room(gridv: Vector2, incoming := [], outgoing := []):
 			_player = obj.duplicate()
 			_player.global_position += obj_offset
 			$Objects.add_child(_player)
+			emit_signal("player_placed", _player.get_path())
 			continue
 		elif obj.is_in_group("enemy") and in_player_room:
 			continue

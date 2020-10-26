@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://modular/RandomWalker.gd" type="Script" id=1]
 [ext_resource path="res://modular/GrassRooms.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tiles/grasstiles/GrassTileMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/PlayerUI.tscn" type="PackedScene" id=4]
 
 [node name="RandomWalker" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,3 +15,7 @@ ModularScene = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerUI" parent="CanvasLayer" instance=ExtResource( 4 )]

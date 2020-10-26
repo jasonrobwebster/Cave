@@ -121,6 +121,7 @@ extents = Vector2( 3.5, 4 )
 collision_layer = 2
 script = ExtResource( 2 )
 max_health = 5
+health = 5
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
