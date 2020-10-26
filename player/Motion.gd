@@ -4,7 +4,6 @@ const TARGET_FPS := 60
 const MAX_FALL_SPEED := 400
 const MAX_MOVE_SPEED := 64
 const MAX_DECCELERATION := 50
-const AIR_ACC := 1
 const JUMP_FORCE := 175
 const COYOTE_TIME := 0.1
 
