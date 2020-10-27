@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://modular/RandomWalker.gd" type="Script" id=1]
+[ext_resource path="res://modular/GrassRooms.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tiles/grasstiles/GrassTileMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://camera/Camera2D.tscn" type="PackedScene" id=4]
+
+[node name="Level1-1" type="Node2D"]
+
+[node name="RandomRoomWalker" type="Node2D" parent="."]
+script = ExtResource( 1 )
+level_path = NodePath("GrassTileMap")
+objects_path = NodePath("Objects")
+ModularScene = ExtResource( 2 )
+
+[node name="GrassTileMap" parent="RandomRoomWalker" instance=ExtResource( 3 )]
+
+[node name="Objects" type="Node2D" parent="RandomRoomWalker"]
+
+[node name="Camera2D" parent="." instance=ExtResource( 4 )]
+[connection signal="level_finished" from="RandomRoomWalker" to="Camera2D" method="follow_player"]
+[connection signal="player_placed" from="RandomRoomWalker" to="Camera2D" method="set_player"]
