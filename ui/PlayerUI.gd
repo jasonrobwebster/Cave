@@ -1,23 +1,14 @@
 extends Control
 
-export(NodePath) var player
-
 var _max_health: int setget set_maxhealth
 var _health: int setget set_health
 
 
 func _ready():
-	if player:
-		set_player(player)
-
-
-func set_player(value: NodePath):
-	var player_node = get_node(value)
-	player = value
-	_max_health = player_node.max_health
-	_health = player_node.health
-	player_node.connect("health_changed", self, "set_health")
-	player_node.connect("max_health_changed", self, "set_maxhealth")
+	PlayerStats.connect("health_changed", self, "set_health")
+	PlayerStats.connect("max_health_changed", self, "set_maxhealth")
+	_max_health = PlayerStats.max_health
+	_health = PlayerStats.health
 	_update_text()
 
 
