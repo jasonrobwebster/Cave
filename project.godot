@@ -75,6 +75,7 @@ config/icon="res://icon.png"
 [autoload]
 
 global="*res://global.gd"
+PlayerStats="*res://player_stats.gd"
 
 [display]
 
