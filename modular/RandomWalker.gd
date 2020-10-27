@@ -1,6 +1,8 @@
 extends Node2D
 class_name RandomRoomWalker
 
+export(NodePath) var level_path
+export(NodePath) var objects_path
 export(PackedScene) var ModularScene
 export(Vector2) var bbox = Vector2(4, 3)
 
@@ -22,6 +24,8 @@ var _player_reached := false
 var _end_reached := false
 var _rng := RandomNumberGenerator.new()
 var _player: Node2D = null
+var _level: TileMap = null
+var _objects: Node2D = null
 
 onready var _rooms: ModularRooms = ModularScene.instance()
 onready var _room_space := ActionSpace.new(
@@ -31,13 +35,18 @@ onready var _room_space := ActionSpace.new(
 )
 
 signal level_finished
-signal player_placed(player)
+signal player_placed(player_path)
 
 
 func _ready():
 	_rng.randomize()
-	connect("level_finished", $Level, "_build_tilemap_from_random_cells")
-	connect("player_placed", $CanvasLayer/PlayerUI, "set_player")
+	if not level_path:
+		level_path = get_node("Level").get_path()
+	if not objects_path:
+		objects_path = get_node("Objects").get_path()
+	_level = get_node(level_path)
+	_objects = get_node(objects_path)
+	connect("level_finished", _level, "_ready")
 	if _rooms.get_class() != "ModularRooms":
 		push_warning("variable 'Rooms' should be a 'ModularRooms' class")
 	_generate_level()
@@ -50,7 +59,6 @@ func _generate_level():
 	_place_rooms()
 	_place_walls()
 	_fill_empty()
-	_attach_camera_to_player()
 	emit_signal("level_finished")
 
 
@@ -78,6 +86,8 @@ func _walk():
 				action_mask[2] = 0
 			Vector2.RIGHT:
 				action_mask[0] = 0
+			Vector2.DOWN:
+				action_mask[1] = 0
 	
 	var current_position: Vector2 = path.back()
 	if current_position.y == bbox.y:
@@ -123,25 +133,21 @@ func _place_walls():
 		for x in range(-2, x_right + 2):
 			var top_v := Vector2(x, y)
 			var bot_v := Vector2(x, y_bottom - y - 1)
-			$Level.set_cellv(top_v, _rooms.wall_id)
-			$Level.set_cellv(bot_v, _rooms.wall_id)
+			_level.set_cellv(top_v, _rooms.wall_id)
+			_level.set_cellv(bot_v, _rooms.wall_id)
 	
 	# fill left & right
 	for y in range(0, y_bottom):
 		for x in range(-2, 0):
 			var left_v := Vector2(x, y)
 			var right_v := Vector2(x_right - x - 1, y)
-			$Level.set_cellv(left_v, _rooms.wall_id)
-			$Level.set_cellv(right_v, _rooms.wall_id)
+			_level.set_cellv(left_v, _rooms.wall_id)
+			_level.set_cellv(right_v, _rooms.wall_id)
 
 
 func _fill_empty():
 	for roomv in _empty_rooms:
 		_place_room(roomv)
-
-
-func _attach_camera_to_player():
-	_player.get_node("RemoteTransform2D").remote_path = $Camera2D.get_path()
 
 
 func _place_room(gridv: Vector2, incoming := [], outgoing := []):
@@ -154,7 +160,7 @@ func _place_room(gridv: Vector2, incoming := [], outgoing := []):
 	var rm_level: TileMap = room_info.level
 	if rm_level:
 		for v in rm_level.get_used_cells():
-			$Level.set_cellv(v + tile_offset, rm_level.get_cellv(v))
+			_level.set_cellv(v + tile_offset, rm_level.get_cellv(v))
 	
 #	var rm_bg: TileMap = room_info.bg
 #	if rm_bg:
@@ -167,14 +173,14 @@ func _place_room(gridv: Vector2, incoming := [], outgoing := []):
 				continue
 			_player = obj.duplicate()
 			_player.global_position += obj_offset
-			$Objects.add_child(_player)
+			_objects.add_child(_player)
 			emit_signal("player_placed", _player.get_path())
 			continue
 		elif obj.is_in_group("enemy") and in_player_room:
 			continue
 		var child: Node2D = obj.duplicate()
 		child.global_position += obj_offset
-		$Objects.add_child(child)
+		_objects.add_child(child)
 
 
 func _get_valid_room(incoming: Array, outgoing: Array, 
