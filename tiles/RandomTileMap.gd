@@ -25,8 +25,9 @@ class_name RandomTileMap
 var cell_map: Dictionary
 
 
-func _init():
-	connect("ready", self, "_build_tilemap_from_random_cells")
+func _ready():
+	if cell_map:
+		_build_tilemap_from_random_cells()
 
 
 func _build_tilemap_from_random_cells():

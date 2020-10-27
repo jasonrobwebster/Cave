@@ -9,3 +9,4 @@ func _ready():
 		Cell.autotile: {"chance": 1.0, "cell": Cell.autotile},
 		Cell.random_grass: {"chance": 0.5, "cell": Cell.autotile}
 	}
+	._ready()
