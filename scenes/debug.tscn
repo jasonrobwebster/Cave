@@ -14,7 +14,6 @@
 visible = false
 
 [node name="PlayerUI" parent="UI" instance=ExtResource( 5 )]
-player = NodePath("../../Player")
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 74.6078, 71.0362 )
