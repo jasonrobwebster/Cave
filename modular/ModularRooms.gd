@@ -1,7 +1,7 @@
 extends Node2D
 class_name ModularRooms
 
-enum Type {R, L, LR, LRT, LRB, LRBT, Empty}
+enum Type {L, R, LR, LB, RB, LT, RT, LRT, LRB, LRBT}
 
 export(Vector2) var room_size = Vector2(4, 4)
 export(Vector2) var tile_size = Vector2(16, 16)
@@ -39,50 +39,38 @@ func _reset_player_rooms():
 
 func get_valid_types(incoming: Array, outgoing: Array, 
 force_player: bool = false, allow_empty: bool = false) -> Array:
-	var valid_types := Type.values()
+	var valid_types := Type.duplicate()
 	
 	for v in incoming:
 		match v:
 			Vector2.LEFT:
-				valid_types.erase(Type.L)
+				_erase_direction_from_types(valid_types, 'R', false)
 			Vector2.RIGHT:
-				valid_types.erase(Type.R)
+				_erase_direction_from_types(valid_types, 'L', false)
 			Vector2.UP:
-				valid_types.erase(Type.L)
-				valid_types.erase(Type.R)
-				valid_types.erase(Type.LR)
-				valid_types.erase(Type.LRT)
+				_erase_direction_from_types(valid_types, 'B', false)
 			Vector2.DOWN:
-				valid_types.erase(Type.L)
-				valid_types.erase(Type.R)
-				valid_types.erase(Type.LR)
-				valid_types.erase(Type.LRB)
+				_erase_direction_from_types(valid_types, 'T', false)
 				
 	for v in outgoing:
 		match v:
 			Vector2.LEFT:
-				valid_types.erase(Type.R)
+				_erase_direction_from_types(valid_types, 'L', false)
 			Vector2.RIGHT:
-				valid_types.erase(Type.L)
+				_erase_direction_from_types(valid_types, 'R', false)
 			Vector2.UP:
-				valid_types.erase(Type.L)
-				valid_types.erase(Type.R)
-				valid_types.erase(Type.LR)
-				valid_types.erase(Type.LRB)
+				_erase_direction_from_types(valid_types, 'T', false)
 			Vector2.DOWN:
-				valid_types.erase(Type.L)
-				valid_types.erase(Type.R)
-				valid_types.erase(Type.LR)
-				valid_types.erase(Type.LRT)
+				_erase_direction_from_types(valid_types, 'B', false)
 	
 	if force_player:
-		for type in valid_types:
-			if _player_rooms[type].empty(): valid_types.erase(type)
+		for key in valid_types.keys():
+			if _player_rooms[valid_types[key]].empty(): valid_types.erase(key)
 	
-	if !allow_empty:
-		valid_types.erase(Type.Empty)
+#	if !allow_empty:
+#		valid_types.erase(Type.Empty)
 	
-	return valid_types
+	return valid_types.values()
 
 
 func get_class():
@@ -109,3 +97,11 @@ func get_room_info(type: int, force_player: bool = false) -> Dictionary:
 		room_info.objects.push_back(child)
 	
 	return room_info
+
+
+func _erase_direction_from_types(types: Dictionary, dir: String, include: bool):
+	for key in types.keys():
+		if (dir in key) and include: 
+			types.erase(key)
+		if !(dir in key) and !include: 
+			types.erase(key)

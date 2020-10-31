@@ -19,7 +19,7 @@ var _action_space := ActionSpace.new(
 	[3, 1, 3],
 	_action_mask
 )
-var _room_mask := [0, 0, 0, 0, 0, 0, 0]
+var _room_mask := [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 var _player_reached := false
 var _end_reached := false
 var _rng := RandomNumberGenerator.new()
@@ -30,7 +30,7 @@ var _objects: Node2D = null
 onready var _rooms: ModularRooms = ModularScene.instance()
 onready var _room_space := ActionSpace.new(
 	_rooms.Type.values(),
-	[1, 1, 5, 3, 3, 2, 0],
+	[1, 1, 2, 1, 1, 1, 1, 1, 1, 1],  #{L, R, LR, LB, RB, LT, RT, LRT, LRB, LRBT}
 	_room_mask
 )
 
