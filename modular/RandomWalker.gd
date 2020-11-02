@@ -30,7 +30,7 @@ var _objects: Node2D = null
 onready var _rooms: ModularRooms = ModularScene.instance()
 onready var _room_space := ActionSpace.new(
 	_rooms.Type.values(),
-	[1, 1, 2, 1, 1, 1, 1, 1, 1, 1],  #{L, R, LR, LB, RB, LT, RT, LRT, LRB, LRBT}
+	[1, 1, 3, 1, 1, 1, 1, 1, 1, 1],  #{L, R, LR, LB, RB, LT, RT, LRT, LRB, LRBT}
 	_room_mask
 )
 
