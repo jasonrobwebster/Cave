@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://lights/torch_flame.png" type="Texture" id=1]
+[ext_resource path="res://lights/light.png" type="Texture" id=2]
+[ext_resource path="res://lights/torch_base.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Position2D
+
+
+func _ready():
+	$AnimationPlayer.play(\"Flame\")
+"
+
+[sub_resource type="Animation" id=1]
+resource_name = "Flame"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("torch_flame:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("torch_flame:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.011, 1.019 ), Vector2( 0.992, 0.982 ), Vector2( 1.06, 1.037 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D:texture_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.01, 0.99, 1.02 ]
+}
+
+[node name="Torch" type="Position2D"]
+script = SubResource( 2 )
+
+[node name="torch_base" type="Sprite" parent="."]
+position = Vector2( 0, -8 )
+texture = ExtResource( 3 )
+
+[node name="torch_flame" type="Sprite" parent="."]
+position = Vector2( 0, -8 )
+scale = Vector2( 1.00177, 1.00306 )
+texture = ExtResource( 1 )
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Flame = SubResource( 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, -8 )
+texture = ExtResource( 2 )
+texture_scale = 1.00161
+color = Color( 0.988235, 0.858824, 0.811765, 1 )
+energy = 1.1
+shadow_enabled = true
