@@ -129,8 +129,8 @@ func _place_walls():
 	var y_bottom = _grid_to_tile_map(bbox).y + _rooms.room_size.y
 	
 	# fill top & bottom
-	for y in range(-2, 0):
-		for x in range(-2, x_right + 2):
+	for y in range(-1, 0):
+		for x in range(-1, x_right + 1):
 			var top_v := Vector2(x, y)
 			var bot_v := Vector2(x, y_bottom - y - 1)
 			_level.set_cellv(top_v, _rooms.wall_id)
@@ -138,7 +138,7 @@ func _place_walls():
 	
 	# fill left & right
 	for y in range(0, y_bottom):
-		for x in range(-2, 0):
+		for x in range(-1, 0):
 			var left_v := Vector2(x, y)
 			var right_v := Vector2(x_right - x - 1, y)
 			_level.set_cellv(left_v, _rooms.wall_id)
