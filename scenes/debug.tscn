@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tiles/grasstiles/GrassTileMap.tscn" type="PackedScene" id=2]
@@ -6,8 +6,21 @@
 [ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/PlayerUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://camera/Camera2D.tscn" type="PackedScene" id=6]
+[ext_resource path="res://lights/Torch.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+tonemap_mode = 2
+tonemap_exposure = 0.9
+tonemap_white = 4.52
+glow_enabled = true
+glow_intensity = 1.0
+adjustment_enabled = true
 
 [node name="debug" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -17,7 +30,7 @@ visible = false
 [node name="PlayerUI" parent="UI" instance=ExtResource( 5 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 74.6078, 71.0362 )
+position = Vector2( 72, 72 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -29,3 +42,12 @@ tile_data = PoolIntArray( 262154, 2, 3, 327684, 2, 3, 327690, 2, 65539, 393220, 
 
 [node name="CameraPivot" parent="." instance=ExtResource( 6 )]
 player_path = NodePath("../Player")
+
+[node name="Torch" parent="." instance=ExtResource( 7 )]
+position = Vector2( 144, 72 )
+
+[node name="Torch2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 104, 80 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.0392157, 0.0470588, 0.207843, 1 )
