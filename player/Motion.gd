@@ -37,6 +37,29 @@ func _bring_speed_to_max(delta):
 			MAX_DECCELERATION * fdelta
 		)
 
+
+func _calculate_velocity(delta, acceleration, friction):
+	var fdelta: float = delta * global.TARGET_FPS
+	var input_x := _get_input_x()
+	if input_x != 0:
+		velocity.x = move_toward(
+			velocity.x, 
+			input_x * MAX_MOVE_SPEED, 
+			acceleration * fdelta
+		)
+		_update_image(input_x)
+	else:
+		velocity.x = move_toward(
+			velocity.x,
+			0,
+			friction * fdelta
+		)
+
+
+func _update_image(input_x):
+	pivot.scale.x = 1 if input_x > 0 else -1
+
+
 func _move():
 	velocity = owner.move_and_slide_with_snap(
 		velocity, 

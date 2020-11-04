@@ -1,5 +1,7 @@
 extends "res://player/Motion.gd"
 
+const ACCELRATION := 25
+const FRICTION := 25
 
 func handle_input(event: InputEvent):
 	if event.is_action_pressed("jump"):
