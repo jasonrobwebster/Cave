@@ -3,7 +3,9 @@
 [ext_resource path="res://tiles/grasstiles/tileset_grasstiles.tres" type="TileSet" id=1]
 [ext_resource path="res://tiles/grasstiles/GrassTileMap.gd" type="Script" id=2]
 
-[node name="GrassTileMap" type="TileMap"]
+[node name="GrassTileMap" type="TileMap" groups=[
+"environment",
+]]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
