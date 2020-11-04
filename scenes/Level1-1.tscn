@@ -13,7 +13,6 @@ script = ExtResource( 1 )
 level_path = NodePath("GrassTileMap")
 objects_path = NodePath("Objects")
 ModularScene = ExtResource( 2 )
-bbox = Vector2( 4, 3 )
 
 [node name="GrassTileMap" parent="RandomRoomWalker" instance=ExtResource( 3 )]
 
