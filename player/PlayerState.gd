@@ -1,5 +1,6 @@
 extends State
 
+onready var sprite: Sprite = owner.get_node("Pivot/Sprite")
 onready var pivot: Position2D = owner.get_node("Pivot")
 onready var anim_player: AnimationPlayer = owner.get_node("AnimationPlayer")
 onready var collision: CollisionShape2D = owner.get_node("Collision")

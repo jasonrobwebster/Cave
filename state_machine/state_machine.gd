@@ -5,7 +5,7 @@ extends Node
 # children are treated as states and are automatically assigned
 # to the state_map dictionary
 
-signal state_change(new_state)
+signal state_change(new_state, previous_state)
 
 export(NodePath) var start_state
 
@@ -54,8 +54,14 @@ func _assign_state_map():
 func _change_state(state_name, args = null):
 	if not active:
 		return
+	if current_state == state_map[state_name]:
+		return
+	var previous_state: State = current_state
 	current_state.exit()
 	current_state = state_map[state_name]
-	current_state.enter(args)
-	emit_signal("state_change", current_state)
+	if args == null:
+		current_state.enter(previous_state.name)
+	else:
+		current_state.enter(previous_state.name, args)
+	emit_signal("state_change", current_state, previous_state)
 	

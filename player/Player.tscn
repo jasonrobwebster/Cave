@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=29 format=2]
 
-[ext_resource path="res://player/player.png" type="Texture" id=1]
+[ext_resource path="res://player/platformer.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
 [ext_resource path="res://player/Idle.gd" type="Script" id=3]
 [ext_resource path="res://state_machine/state_machine.gd" type="Script" id=4]
@@ -9,12 +9,14 @@
 [ext_resource path="res://boxes/Hurtbox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://boxes/Hitbox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://player/Hold.gd" type="Script" id=9]
+[ext_resource path="res://player/Fall.gd" type="Script" id=10]
+[ext_resource path="res://player/Land.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 1 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 3.5, 6 )
+extents = Vector2( 3, 6.5 )
 
 [sub_resource type="Animation" id=3]
 length = 0.2
@@ -32,8 +34,9 @@ tracks/0/keys = {
 "values": [ 18, 19 ]
 }
 
-[sub_resource type="Animation" id=4]
-length = 0.4
+[sub_resource type="Animation" id=11]
+resource_name = "FallDown"
+length = 0.1
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Sprite:frame")
@@ -42,13 +45,31 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [ 21 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "FallForwardDown"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 28 ]
 }
 
 [sub_resource type="Animation" id=5]
+resource_name = "FallForwardMid"
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -61,10 +82,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 12 ]
+"values": [ 27 ]
 }
 
 [sub_resource type="Animation" id=6]
+resource_name = "FallForwardUp"
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -77,11 +99,61 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 13 ]
+"values": [ 26 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "FallMid"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 20 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "FallUp"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 19 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "Grapple"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 36 ]
 }
 
 [sub_resource type="Animation" id=7]
-length = 0.1
+length = 0.7
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Sprite:frame")
@@ -90,13 +162,153 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 14 ]
+"values": [ 0, 1, 2 ]
 }
 
 [sub_resource type="Animation" id=8]
+resource_name = "JumpForward"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 24, 25 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.2, 0.25 ),
+"transitions": PoolRealArray( 0.0947322, 8.87655, 0.233258, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1.2 ), Vector2( 1, 1 ), Vector2( 1.052, 0.965 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateMachine/Jump")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_go_to_Fall_state"
+} ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "JumpUp"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 18, 19 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.0526604, 0.15, 0.2, 0.25 ),
+"transitions": PoolRealArray( 0.09, 8, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1.2 ), Vector2( 1, 1 ), Vector2( 1.087, 0.951 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateMachine/Jump")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_go_to_Fall_state"
+} ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "Land"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 31, 32 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.2, 0.25 ),
+"transitions": PoolRealArray( 0.217638, 15, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 0.9 ), Vector2( 1, 1 ), Vector2( 0.935, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15 ),
+"transitions": PoolRealArray( 0.217638, 15, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -8 ), Vector2( 1, -7.2 ), Vector2( 1, -8 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("StateMachine/Land")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_go_to_Ground_state"
+} ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "Run"
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -109,11 +321,28 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 8, 9, 10, 11, 6, 7 ]
+"values": [ 12, 13, 14, 15, 16, 17 ]
 }
 
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 3.5, 4 )
+[sub_resource type="Animation" id=9]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9, 10, 11 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 2.0
+height = 8.0
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -136,40 +365,55 @@ script = ExtResource( 5 )
 [node name="Hold" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
 
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource( 10 )
+
+[node name="Land" type="Node" parent="StateMachine"]
+script = ExtResource( 11 )
+
 [node name="Pivot" type="Position2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Pivot"]
-position = Vector2( 0.5, -8 )
+position = Vector2( 1, -8 )
 texture = ExtResource( 1 )
-vframes = 4
+vframes = 7
 hframes = 6
-frame = 8
+frame = 18
 
 [node name="HoldTop" type="Area2D" parent="Pivot"]
-position = Vector2( -5, -11 )
+position = Vector2( 5, -12 )
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/HoldTop"]
+position = Vector2( -1, 0 )
 shape = SubResource( 1 )
 
 [node name="HoldBottom" type="Area2D" parent="Pivot"]
-position = Vector2( -5, -9 )
+position = Vector2( 4, -10 )
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/HoldBottom"]
 shape = SubResource( 1 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -6 )
+position = Vector2( 0, -6.5 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Climb = SubResource( 3 )
-anims/Idle = SubResource( 4 )
-anims/JumpDown = SubResource( 5 )
-anims/JumpMid = SubResource( 6 )
-anims/JumpUp = SubResource( 7 )
-anims/Walk = SubResource( 8 )
+anims/FallDown = SubResource( 11 )
+anims/FallForwardDown = SubResource( 4 )
+anims/FallForwardMid = SubResource( 5 )
+anims/FallForwardUp = SubResource( 6 )
+anims/FallMid = SubResource( 12 )
+anims/FallUp = SubResource( 13 )
+anims/Grapple = SubResource( 14 )
+anims/Idle = SubResource( 7 )
+anims/JumpForward = SubResource( 8 )
+anims/JumpUp = SubResource( 15 )
+anims/Land = SubResource( 16 )
+anims/Run = SubResource( 17 )
+anims/Walk = SubResource( 9 )
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -187,12 +431,12 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, -7 )
-shape = SubResource( 9 )
-[connection signal="body_entered" from="Pivot/HoldTop" to="StateMachine/Jump" method="_on_HoldTop_body_entered"]
-[connection signal="body_exited" from="Pivot/HoldTop" to="StateMachine/Jump" method="_on_HoldTop_body_exited"]
-[connection signal="body_entered" from="Pivot/HoldBottom" to="StateMachine/Jump" method="_on_HoldBottom_body_entered"]
-[connection signal="body_exited" from="Pivot/HoldBottom" to="StateMachine/Jump" method="_on_HoldBottom_body_exited"]
+position = Vector2( 0, -6 )
+shape = SubResource( 10 )
+[connection signal="body_entered" from="Pivot/HoldTop" to="StateMachine/Fall" method="_on_HoldTop_body_entered"]
+[connection signal="body_exited" from="Pivot/HoldTop" to="StateMachine/Fall" method="_on_HoldTop_body_exited"]
+[connection signal="body_entered" from="Pivot/HoldBottom" to="StateMachine/Fall" method="_on_HoldBottom_body_entered"]
+[connection signal="body_exited" from="Pivot/HoldBottom" to="StateMachine/Fall" method="_on_HoldBottom_body_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="Hitbox"]

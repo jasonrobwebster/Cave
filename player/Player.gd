@@ -6,4 +6,3 @@ func _on_Hurtbox_area_entered(area: Hitbox):
 		PlayerStats.health -= area.damage
 
 
-

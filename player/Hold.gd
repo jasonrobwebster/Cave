@@ -4,8 +4,8 @@ const JUMP_VSPEED = 150
 const JUMP_HSPEED = 60
 
 
-func enter(args=null):
-	anim_player.play("Idle")
+func enter(previous_state: String = '', args=null):
+	anim_player.play("Grapple")
 
 
 func handle_input(event: InputEvent):

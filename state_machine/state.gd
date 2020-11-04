@@ -7,7 +7,7 @@ extends Node
 signal state_change(next_state, args)
 
 
-func enter(args = null):
+func enter(_previous_state: String = '', _args = null):
 	# handle entering state
 	pass
 
