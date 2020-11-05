@@ -45,9 +45,3 @@ player_path = NodePath("../Player")
 
 [node name="Torch" parent="." instance=ExtResource( 7 )]
 position = Vector2( 144, 72 )
-
-[node name="Torch2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 104, 80 )
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.0392157, 0.0470588, 0.207843, 1 )
