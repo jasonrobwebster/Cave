@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://player/platformer.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://player/Hold.gd" type="Script" id=9]
 [ext_resource path="res://player/Fall.gd" type="Script" id=10]
 [ext_resource path="res://player/Land.gd" type="Script" id=11]
+[ext_resource path="res://lights/light_strong.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 1 )
@@ -34,7 +35,7 @@ tracks/0/keys = {
 "values": [ 18, 19 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=4]
 resource_name = "FallDown"
 length = 0.1
 loop = true
@@ -51,8 +52,7 @@ tracks/0/keys = {
 "values": [ 21 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "FallForwardDown"
+[sub_resource type="Animation" id=5]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -68,8 +68,7 @@ tracks/0/keys = {
 "values": [ 28 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "FallForwardMid"
+[sub_resource type="Animation" id=6]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -85,8 +84,7 @@ tracks/0/keys = {
 "values": [ 27 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "FallForwardUp"
+[sub_resource type="Animation" id=7]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -102,7 +100,7 @@ tracks/0/keys = {
 "values": [ 26 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=8]
 resource_name = "FallMid"
 length = 0.1
 loop = true
@@ -119,7 +117,7 @@ tracks/0/keys = {
 "values": [ 20 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=9]
 resource_name = "FallUp"
 length = 0.1
 loop = true
@@ -136,7 +134,7 @@ tracks/0/keys = {
 "values": [ 19 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=10]
 resource_name = "Grapple"
 length = 0.1
 tracks/0/type = "value"
@@ -152,7 +150,7 @@ tracks/0/keys = {
 "values": [ 36 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=11]
 length = 0.7
 loop = true
 tracks/0/type = "value"
@@ -168,8 +166,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "JumpForward"
+[sub_resource type="Animation" id=12]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Sprite:frame")
@@ -210,7 +207,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=13]
 resource_name = "JumpUp"
 length = 0.3
 tracks/0/type = "value"
@@ -252,7 +249,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=14]
 resource_name = "Land"
 length = 0.3
 step = 0.05
@@ -307,7 +304,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=15]
 resource_name = "Run"
 length = 0.6
 loop = true
@@ -324,7 +321,7 @@ tracks/0/keys = {
 "values": [ 12, 13, 14, 15, 16, 17 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=16]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -340,7 +337,7 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 9, 10, 11 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=10]
+[sub_resource type="CapsuleShape2D" id=17]
 radius = 2.0
 height = 8.0
 
@@ -373,6 +370,13 @@ script = ExtResource( 11 )
 
 [node name="Pivot" type="Position2D" parent="."]
 
+[node name="Light2D" type="Light2D" parent="Pivot"]
+position = Vector2( 0, -6 )
+texture = ExtResource( 12 )
+texture_scale = 0.8
+mode = 2
+shadow_enabled = true
+
 [node name="Sprite" type="Sprite" parent="Pivot"]
 position = Vector2( 1, -8 )
 texture = ExtResource( 1 )
@@ -401,19 +405,19 @@ shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Climb = SubResource( 3 )
-anims/FallDown = SubResource( 11 )
-anims/FallForwardDown = SubResource( 4 )
-anims/FallForwardMid = SubResource( 5 )
-anims/FallForwardUp = SubResource( 6 )
-anims/FallMid = SubResource( 12 )
-anims/FallUp = SubResource( 13 )
-anims/Grapple = SubResource( 14 )
-anims/Idle = SubResource( 7 )
-anims/JumpForward = SubResource( 8 )
-anims/JumpUp = SubResource( 15 )
-anims/Land = SubResource( 16 )
-anims/Run = SubResource( 17 )
-anims/Walk = SubResource( 9 )
+anims/FallDown = SubResource( 4 )
+anims/FallForwardDown = SubResource( 5 )
+anims/FallForwardMid = SubResource( 6 )
+anims/FallForwardUp = SubResource( 7 )
+anims/FallMid = SubResource( 8 )
+anims/FallUp = SubResource( 9 )
+anims/Grapple = SubResource( 10 )
+anims/Idle = SubResource( 11 )
+anims/JumpForward = SubResource( 12 )
+anims/JumpUp = SubResource( 13 )
+anims/Land = SubResource( 14 )
+anims/Run = SubResource( 15 )
+anims/Walk = SubResource( 16 )
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -432,7 +436,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -6 )
-shape = SubResource( 10 )
+shape = SubResource( 17 )
 [connection signal="body_entered" from="Pivot/HoldTop" to="StateMachine/Fall" method="_on_HoldTop_body_entered"]
 [connection signal="body_exited" from="Pivot/HoldTop" to="StateMachine/Fall" method="_on_HoldTop_body_exited"]
 [connection signal="body_entered" from="Pivot/HoldBottom" to="StateMachine/Fall" method="_on_HoldBottom_body_entered"]
