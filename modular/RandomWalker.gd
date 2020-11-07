@@ -1,8 +1,8 @@
 extends Node2D
 class_name RandomRoomWalker
 
-export(NodePath) var level_path
-export(NodePath) var objects_path
+export(NodePath) var background_path
+export(NodePath) var walls_path
 export(PackedScene) var ModularScene
 export(Vector2) var bbox = Vector2(4, 3)
 
@@ -24,8 +24,10 @@ var _player_reached := false
 var _end_reached := false
 var _rng := RandomNumberGenerator.new()
 var _player: Node2D = null
-var _level: TileMap = null
 var _objects: Node2D = null
+var _tilemaps: Dictionary = {}
+var _bg: TileMap = null
+var _walls: TileMap = null
 
 onready var _rooms: ModularRooms = ModularScene.instance()
 onready var _room_space := ActionSpace.new(
@@ -40,15 +42,28 @@ signal player_placed(player_path)
 
 func _ready():
 	_rng.randomize()
-	if not level_path:
-		level_path = get_node("Level").get_path()
-	if not objects_path:
-		objects_path = get_node("Objects").get_path()
-	_level = get_node(level_path)
-	_objects = get_node(objects_path)
-	connect("level_finished", _level, "_ready")
+	if not background_path:
+		background_path = get_child(0).get_path()
+	if not walls_path:
+		walls_path = get_child(1).get_path()
+	
+	_bg = get_node(background_path)
+	_walls = get_node(walls_path)
+	_tilemaps[_bg.name] = _bg
+	_tilemaps[_walls.name] = _walls
+	
+	if not _objects:
+		_objects = Node2D.new()
+		_objects.global_position = global_position
+		_objects.name = "Objects"
+		add_child(_objects)
+	
+	for tm in _tilemaps.values():
+		connect("level_finished", tm, "_ready")
+	
 	if _rooms.get_class() != "ModularRooms":
 		push_warning("variable 'Rooms' should be a 'ModularRooms' class")
+	
 	_generate_level()
 
 
@@ -58,6 +73,7 @@ func _generate_level():
 		_walk()
 	_place_rooms()
 	_place_walls()
+	_place_background()
 	_fill_empty()
 	emit_signal("level_finished")
 
@@ -133,16 +149,25 @@ func _place_walls():
 		for x in range(-1, x_right + 1):
 			var top_v := Vector2(x, y)
 			var bot_v := Vector2(x, y_bottom - y - 1)
-			_level.set_cellv(top_v, _rooms.wall_id)
-			_level.set_cellv(bot_v, _rooms.wall_id)
+			_walls.set_cellv(top_v, _rooms.wall_id)
+			_walls.set_cellv(bot_v, _rooms.wall_id)
 	
 	# fill left & right
 	for y in range(0, y_bottom):
 		for x in range(-1, 0):
 			var left_v := Vector2(x, y)
 			var right_v := Vector2(x_right - x - 1, y)
-			_level.set_cellv(left_v, _rooms.wall_id)
-			_level.set_cellv(right_v, _rooms.wall_id)
+			_walls.set_cellv(left_v, _rooms.wall_id)
+			_walls.set_cellv(right_v, _rooms.wall_id)
+
+
+func _place_background():
+	var x_right = _grid_to_tile_map(bbox).x + _rooms.room_size.x
+	var y_bottom = _grid_to_tile_map(bbox).y + _rooms.room_size.y
+	
+	for x in range(-2, x_right + 2):
+		for y in range(-2, y_bottom + 2):
+			_bg.set_cell(x, y, 0, false, false, false, _get_subtile_coord(_bg, 0))
 
 
 func _fill_empty():
@@ -157,15 +182,11 @@ func _place_room(gridv: Vector2, incoming := [], outgoing := []):
 	
 	var room_info = _get_valid_room(incoming, outgoing, in_player_room)
 	
-	var rm_level: TileMap = room_info.level
-	if rm_level:
-		for v in rm_level.get_used_cells():
-			_level.set_cellv(v + tile_offset, rm_level.get_cellv(v))
-	
-#	var rm_bg: TileMap = room_info.bg
-#	if rm_bg:
-#		for v in rm_bg.get_used_cells():
-#			$Background.set_cellv(v + tile_offset, rm_level.get_cellv(v))
+	var rm_tilemaps: Array = room_info.get("tilemaps", [])
+	for tm in rm_tilemaps:
+		_handle_tilemap(tm)
+		for v in tm.get_used_cells():
+			_tilemaps[tm.name].set_cellv(v + tile_offset, tm.get_cellv(v))
 	
 	for obj in room_info.objects:
 		if obj.is_in_group("player"):
@@ -183,6 +204,15 @@ func _place_room(gridv: Vector2, incoming := [], outgoing := []):
 		_objects.add_child(child)
 
 
+func _handle_tilemap(tm: TileMap):
+	if !(tm.name in _tilemaps.keys()):
+		var child_tm: TileMap = tm.duplicate()
+		child_tm.clear()
+		add_child(child_tm)
+		_tilemaps[tm.name] = child_tm
+		connect("level_finished", child_tm, "_ready")
+
+
 func _get_valid_room(incoming: Array, outgoing: Array, 
 in_player_room: bool) -> Dictionary:
 	var mask := _room_mask.duplicate()
@@ -196,6 +226,14 @@ in_player_room: bool) -> Dictionary:
 	var room_info := _rooms.get_room_info(room_type, in_player_room)
 	
 	return room_info
+
+
+func _get_subtile_coord(tm: TileMap, cell_id: int):
+	var tiles = tm.tile_set
+	var rect = tiles.tile_get_region(cell_id)
+	var x = randi() % int(rect.size.x / tiles.autotile_get_size(cell_id).x)
+	var y = randi() % int(rect.size.y / tiles.autotile_get_size(cell_id).y)
+	return Vector2(x, y)
 
 
 func _grid_to_tile_map(gridv: Vector2) -> Vector2:
