@@ -23,7 +23,7 @@ func exit():
 func update(delta):
 	var fall_speed := velocity.dot(global.up_direction)
 	if owner.is_on_floor() and fall_speed <= 0:
-		emit_signal("state_change", "Land")
+		emit_signal("state_change", "Land", velocity)
 	_calculate_velocity(delta, ACCELERATION, FRICTION)
 	.update(delta)
 

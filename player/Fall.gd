@@ -40,7 +40,7 @@ func update(delta):
 			anim_player.play("FallDown")
 	
 	if owner.is_on_floor() and fall_speed <= 0:
-		emit_signal("state_change", "Land")
+		emit_signal("state_change", "Land", velocity)
 	
 	if can_hold and fall_speed < HOLD_SPEED and owner.is_on_wall():
 		velocity = Vector2.ZERO

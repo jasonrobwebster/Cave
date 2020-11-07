@@ -1,7 +1,8 @@
 extends "res://player/OnGround.gd"
 
 
-func enter(previous_state: String = '', args=null):
+func enter(previous_state: String = '', v: Vector2 = Vector2.ZERO):
+	velocity = v
 	anim_player.play("Land")
 	_snap = true
 
