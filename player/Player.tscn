@@ -11,7 +11,7 @@
 [ext_resource path="res://player/Hold.gd" type="Script" id=9]
 [ext_resource path="res://player/Fall.gd" type="Script" id=10]
 [ext_resource path="res://player/Land.gd" type="Script" id=11]
-[ext_resource path="res://lights/light_strong.png" type="Texture" id=12]
+[ext_resource path="res://lights/light_strong2.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 1 )
@@ -370,13 +370,6 @@ script = ExtResource( 11 )
 
 [node name="Pivot" type="Position2D" parent="."]
 
-[node name="Light2D" type="Light2D" parent="Pivot"]
-position = Vector2( 0, -6 )
-texture = ExtResource( 12 )
-texture_scale = 0.8
-mode = 2
-shadow_enabled = true
-
 [node name="Sprite" type="Sprite" parent="Pivot"]
 position = Vector2( 1, -8 )
 texture = ExtResource( 1 )
@@ -384,7 +377,14 @@ vframes = 7
 hframes = 6
 frame = 18
 
+[node name="Light2D" type="Light2D" parent="Pivot"]
+position = Vector2( 0, -6 )
+texture = ExtResource( 12 )
+mode = 2
+shadow_enabled = true
+
 [node name="HoldTop" type="Area2D" parent="Pivot"]
+visible = false
 position = Vector2( 5, -12 )
 collision_mask = 0
 
@@ -393,6 +393,7 @@ position = Vector2( -1, 0 )
 shape = SubResource( 1 )
 
 [node name="HoldBottom" type="Area2D" parent="Pivot"]
+visible = false
 position = Vector2( 4, -10 )
 collision_mask = 0
 
@@ -400,6 +401,7 @@ collision_mask = 0
 shape = SubResource( 1 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -6.5 )
 shape = SubResource( 2 )
 
@@ -427,10 +429,12 @@ autostart = true
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 
 [node name="Hitbox" parent="." instance=ExtResource( 8 )]
+visible = false
 collision_layer = 0
 collision_mask = 32
 
 [node name="Hurtbox" parent="." instance=ExtResource( 7 )]
+visible = false
 collision_layer = 8
 collision_mask = 0
 
