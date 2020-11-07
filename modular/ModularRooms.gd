@@ -78,21 +78,17 @@ func get_class():
 
 
 func get_room_info(type: int, force_player: bool = false) -> Dictionary:
-	var room_info: Dictionary = {"objects": [], "level": null, "bg": null}
+	var room_info: Dictionary = {"objects": [], "tilemaps": []}
 	var room_dir := get_child(type)
 	var index = _rng.randi_range(0, room_dir.get_child_count()-1)
 	if force_player:
 		var player_indexes = _player_rooms[type]
 		index = player_indexes[_rng.randi() % player_indexes.size()]
 	var room_node := room_dir.get_child(index)
-	var level_tilemap: TileMap = room_node.get_node_or_null("Level")
-	var bg_tilemap: TileMap = room_node.get_node_or_null("Background")
-	
-	room_info.level  = level_tilemap
-	room_info.bg = bg_tilemap
 	
 	for child in room_node.get_children():
-		if child == level_tilemap or child == bg_tilemap:
+		if child is TileMap:
+			room_info.tilemaps.push_back(child)
 			continue
 		room_info.objects.push_back(child)
 	
