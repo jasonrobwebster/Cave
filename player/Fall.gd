@@ -33,7 +33,6 @@ func update(delta):
 			anim_player.play("FallForwardMid")
 		elif abs(velocity.x) <= FORWARD_HSPEED and anim_player.current_animation != "FallMid":
 			anim_player.play("FallMid")
-		anim_player.play("JumpMid")
 	elif fall_speed < -MID_VSPEED:
 		if abs(velocity.x) > FORWARD_HSPEED and anim_player.current_animation != "FallForwardDown":
 			anim_player.play("FallForwardDown")
