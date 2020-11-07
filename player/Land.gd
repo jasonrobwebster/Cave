@@ -7,7 +7,9 @@ func enter(previous_state: String = '', args=null):
 
 
 func exit():
+	anim_player.stop()
 	sprite.scale.x = -1 if sprite.scale.x < 0 else 1
+	sprite.scale.y = 1
 
 
 func update(delta):
