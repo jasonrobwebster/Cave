@@ -32,7 +32,7 @@ var _walls: TileMap = null
 onready var _rooms: ModularRooms = ModularScene.instance()
 onready var _room_space := ActionSpace.new(
 	_rooms.Type.values(),
-	[1, 1, 3, 1, 1, 1, 1, 1, 1, 1],  #{L, R, LR, LB, RB, LT, RT, LRT, LRB, LRBT}
+	[1, 1, 3, 1, 1, 1, 1, 1, 1, 0.5],  #{L, R, LR, LB, RB, LT, RT, LRT, LRB, LRBT}
 	_room_mask
 )
 
@@ -145,8 +145,8 @@ func _place_walls():
 	var y_bottom = _grid_to_tile_map(bbox).y + _rooms.room_size.y
 	
 	# fill top & bottom
-	for y in range(-1, 0):
-		for x in range(-1, x_right + 1):
+	for y in range(-3, 0):
+		for x in range(-3, x_right + 3):
 			var top_v := Vector2(x, y)
 			var bot_v := Vector2(x, y_bottom - y - 1)
 			_walls.set_cellv(top_v, _rooms.wall_id)
@@ -154,7 +154,7 @@ func _place_walls():
 	
 	# fill left & right
 	for y in range(0, y_bottom):
-		for x in range(-1, 0):
+		for x in range(-3, 0):
 			var left_v := Vector2(x, y)
 			var right_v := Vector2(x_right - x - 1, y)
 			_walls.set_cellv(left_v, _rooms.wall_id)
