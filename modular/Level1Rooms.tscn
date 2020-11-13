@@ -445,3 +445,12 @@ visible = false
 
 [node name="RockyGrass" parent="LRBT/2" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 65540, 0, 196608, 65541, 0, 327690, 196609, 0, 327688, 196610, 0, 196610, 262148, 0, 196608, 262149, 0, 196610 )
+
+[node name="3" type="Node2D" parent="LRBT"]
+
+[node name="RockyGrass" parent="LRBT/3" instance=ExtResource( 4 )]
+
+[node name="4" type="Node2D" parent="LRBT"]
+
+[node name="RockyGrass" parent="LRBT/4" instance=ExtResource( 4 )]
+tile_data = PoolIntArray( 0, 1, 0, 7, 1, 0, 327680, 1, 0, 327687, 1, 0 )
