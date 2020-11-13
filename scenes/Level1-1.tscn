@@ -14,6 +14,7 @@ script = ExtResource( 1 )
 background_path = NodePath("RockyBack")
 walls_path = NodePath("RockyGrass")
 ModularScene = ExtResource( 2 )
+bbox = Vector2( 5, 4 )
 
 [node name="RockyBack" parent="RandomRoomWalker" instance=ExtResource( 3 )]
 
