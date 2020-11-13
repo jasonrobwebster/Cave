@@ -1,6 +1,6 @@
 extends "res://player/PlayerState.gd"
 
-const JUMP_VSPEED = 150
+const JUMP_VSPEED = 185
 const JUMP_HSPEED = 60
 
 

@@ -16,6 +16,7 @@ func enter(previous_state: String = '', v: Vector2 = Vector2.ZERO):
 
 
 func exit():
+	anim_player.stop()
 	sprite.scale.x = -1 if sprite.scale.x < 0 else 1
 	sprite.scale.y = 1
 
