@@ -3,6 +3,8 @@ extends Node
 # defines a basic state structure
 # meant to be extended by other nodes
 
+var active := true setget set_active
+
 # warning-ignore:unused_signal
 signal state_change(next_state, args)
 
@@ -25,3 +27,9 @@ func update(_delta):
 func handle_input(_event):
 	# called during _unhandled_input
 	pass
+
+
+func set_active(value: bool):
+	active = value
+	set_physics_process(value)
+	set_process_input(value)

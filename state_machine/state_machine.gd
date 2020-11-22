@@ -25,6 +25,7 @@ func _ready():
 func initialise(start_path: NodePath):
 	set_active(true)
 	_assign_state_map()
+	_init_states()
 	current_state = get_node(start_path)
 	current_state.enter()
 
@@ -51,6 +52,11 @@ func _assign_state_map():
 		state_map[child.name] = child
 
 
+func _init_states():
+	for child in get_children():
+		child.active = false
+
+
 func _change_state(state_name, args = null):
 	if not active:
 		return
@@ -59,6 +65,10 @@ func _change_state(state_name, args = null):
 	var previous_state: State = current_state
 	current_state.exit()
 	current_state = state_map[state_name]
+	
+	previous_state.active = false
+	current_state.active = true
+	
 	if args == null:
 		current_state.enter(previous_state.name)
 	else:
