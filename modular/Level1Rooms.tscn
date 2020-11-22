@@ -2,8 +2,8 @@
 
 [ext_resource path="res://modular/ModularRooms.gd" type="Script" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://enemies/bat/Bat.tscn" type="PackedScene" id=3]
 [ext_resource path="res://tiles/rockygrass/RockyGrass.tscn" type="PackedScene" id=4]
-[ext_resource path="res://tiles/rockyback/RockyBack.tscn" type="PackedScene" id=5]
 
 [node name="Level1Rooms" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,6 +19,9 @@ tile_data = PoolIntArray( 0, 0, 196608, 1, 0, 327689, 2, 0, 327689, 3, 0, 196609
 
 [node name="Player" parent="L/0" instance=ExtResource( 2 )]
 position = Vector2( 64, 80 )
+
+[node name="Bat" parent="L/0" instance=ExtResource( 3 )]
+position = Vector2( 32, 32 )
 
 [node name="1" type="Node2D" parent="L"]
 visible = false
@@ -37,6 +40,9 @@ tile_data = PoolIntArray( 0, 0, 327685, 1, 0, 327683, 2, 0, 5, 3, 0, 196609, 4, 
 
 [node name="Player" parent="L/2" instance=ExtResource( 2 )]
 position = Vector2( 80, 48 )
+
+[node name="Bat" parent="L/2" instance=ExtResource( 3 )]
+position = Vector2( 80, 32 )
 
 [node name="3" type="Node2D" parent="L"]
 visible = false
@@ -74,11 +80,17 @@ visible = false
 [node name="RockyGrass" parent="L/7" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 327688, 1, 0, 6, 2, 0, 5, 3, 0, 327689, 4, 0, 327689, 5, 0, 196609, 6, 0, 327689, 7, 0, 7, 65537, 0, 131072, 65538, 0, 65543, 65539, 1, 0, 65543, 0, 65539, 131073, 1, 0, 131074, 0, 65539, 131075, 2, 0, 131076, 2, 0, 131077, 3, 0, 131079, 0, 65539, 196610, 0, 196612, 196611, 0, 196609, 196612, 0, 327689, 196613, 0, 196610, 196615, 0, 65539, 262151, 0, 65539, 327680, 0, 196608, 327681, 0, 196609, 327682, 0, 196609, 327683, 0, 196609, 327684, 0, 196609, 327685, 0, 327689, 327686, 0, 196609, 327687, 0, 196615 )
 
+[node name="Bat" parent="L/7" instance=ExtResource( 3 )]
+position = Vector2( 80, 24 )
+
 [node name="8" type="Node2D" parent="L"]
 visible = false
 
 [node name="RockyGrass" parent="L/8" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 327688, 1, 0, 327689, 2, 0, 327689, 3, 0, 196609, 4, 0, 196609, 5, 0, 6, 6, 0, 1, 7, 0, 327684, 65540, 1, 0, 65541, 0, 65536, 65542, 0, 327681, 65543, 0, 65538, 131076, 2, 0, 131077, 0, 65536, 131078, 0, 65537, 131079, 0, 65538, 196610, 0, 196608, 196611, 0, 327689, 196612, 0, 196609, 196613, 0, 196614, 196614, 0, 65542, 196615, 0, 65538, 262147, 2, 0, 262148, 2, 0, 262149, 1, 0, 262150, 0, 65536, 262151, 0, 65538, 327680, 0, 196608, 327681, 0, 196609, 327682, 0, 196609, 327683, 0, 327689, 327684, 0, 196609, 327685, 0, 196609, 327686, 0, 196614, 327687, 0, 131074 )
+
+[node name="Bat" parent="L/8" instance=ExtResource( 3 )]
+position = Vector2( 16, 32 )
 
 [node name="R" type="Node2D" parent="."]
 
@@ -91,6 +103,9 @@ tile_data = PoolIntArray( 0, 0, 4, 1, 0, 196609, 2, 0, 327689, 3, 0, 196609, 4, 
 [node name="Player" parent="R/0" instance=ExtResource( 2 )]
 position = Vector2( 32, 64 )
 
+[node name="Bat" parent="R/0" instance=ExtResource( 3 )]
+position = Vector2( 64, 40 )
+
 [node name="1" type="Node2D" parent="R"]
 visible = false
 
@@ -100,6 +115,9 @@ tile_data = PoolIntArray( 0, 0, 4, 1, 0, 327689, 2, 0, 196609, 3, 0, 196609, 4, 
 [node name="Player" parent="R/1" instance=ExtResource( 2 )]
 position = Vector2( 64, 64 )
 
+[node name="Bat" parent="R/1" instance=ExtResource( 3 )]
+position = Vector2( 64, 32 )
+
 [node name="2" type="Node2D" parent="R"]
 visible = false
 
@@ -108,6 +126,9 @@ tile_data = PoolIntArray( 0, 0, 4, 1, 0, 327689, 2, 0, 196609, 3, 0, 327689, 4, 
 
 [node name="Player" parent="R/2" instance=ExtResource( 2 )]
 position = Vector2( 32, 48 )
+
+[node name="Bat" parent="R/2" instance=ExtResource( 3 )]
+position = Vector2( 72, 32 )
 
 [node name="3" type="Node2D" parent="R"]
 visible = false
@@ -133,9 +154,6 @@ tile_data = PoolIntArray( 0, 0, 327682, 1, 0, 5, 2, 0, 196609, 3, 0, 196609, 4, 
 [node name="6" type="Node2D" parent="R"]
 visible = false
 
-[node name="RockyBack" parent="R/6" instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 1, 3, 0, 1, 4, 0, 0, 5, 0, 1, 6, 0, 0, 7, 0, 0, 65536, 0, 1, 65537, 0, 0, 65538, 0, 1, 65539, 0, 1, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 1, 131072, 0, 0, 131073, 0, 0, 131074, 0, 1, 131075, 0, 1, 131076, 0, 1, 131077, 0, 0, 131078, 0, 0, 131079, 0, 1, 196608, 0, 1, 196609, 0, 1, 196610, 0, 0, 196611, 0, 1, 196612, 0, 1, 196613, 0, 0, 196614, 0, 1, 196615, 0, 0, 262144, 0, 0, 262145, 0, 1, 262146, 0, 0, 262147, 0, 1, 262148, 0, 0, 262149, 0, 1, 262150, 0, 0, 262151, 0, 0, 327680, 0, 1, 327681, 0, 1, 327682, 0, 1, 327683, 0, 1, 327684, 0, 1, 327685, 0, 1, 327686, 0, 0, 327687, 0, 1 )
-
 [node name="RockyGrass" parent="R/6" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 5, 2, 0, 196609, 3, 0, 196609, 4, 0, 196609, 5, 0, 6, 6, 0, 5, 7, 0, 327690, 65536, 0, 65540, 65537, 0, 131074, 65538, 1, 0, 65541, 0, 65536, 65542, 0, 65538, 131072, 0, 65539, 131077, 0, 65536, 131078, 0, 65538, 196608, 0, 65539, 196611, 0, 196608, 196612, 0, 327689, 196613, 0, 196614, 196614, 0, 131074, 262144, 0, 131076, 262145, 0, 327687, 262146, 2, 0, 262147, 2, 0, 262148, 3, 0, 327680, 0, 131072, 327681, 0, 196613, 327682, 0, 327689, 327683, 0, 196609, 327684, 0, 327689, 327685, 0, 196609, 327686, 0, 196609, 327687, 0, 196610 )
 
@@ -145,11 +163,17 @@ visible = false
 [node name="RockyGrass" parent="R/7" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 4, 1, 0, 196609, 2, 0, 196609, 3, 0, 327689, 4, 0, 327689, 5, 0, 196609, 6, 0, 196609, 7, 0, 196610, 65536, 0, 65539, 65537, 1, 0, 131072, 0, 65539, 196608, 0, 65539, 196609, 2, 0, 196610, 2, 0, 262144, 0, 262148, 262145, 0, 196609, 262146, 0, 196609, 262147, 0, 327689, 262148, 0, 7, 327680, 0, 131075, 327683, 1, 0, 327684, 0, 196612, 327685, 0, 327689, 327686, 0, 327689, 327687, 0, 196610 )
 
+[node name="Bat" parent="R/7" instance=ExtResource( 3 )]
+position = Vector2( 64, 32 )
+
 [node name="8" type="Node2D" parent="R"]
 visible = false
 
 [node name="RockyGrass" parent="R/8" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 4, 1, 0, 327689, 2, 0, 196609, 3, 0, 327689, 4, 0, 196609, 5, 0, 327689, 6, 0, 327689, 7, 0, 327690, 65536, 0, 65539, 65537, 1, 0, 65538, 1, 0, 131072, 0, 65539, 196608, 0, 65539, 262144, 0, 65539, 262145, 1, 0, 262146, 0, 4, 262147, 0, 327689, 262148, 0, 327689, 262149, 0, 327689, 262150, 0, 7, 327680, 0, 196612, 327681, 0, 196609, 327682, 0, 196615, 327683, 1, 0, 327686, 0, 196612, 327687, 0, 196610 )
+
+[node name="Bat" parent="R/8" instance=ExtResource( 3 )]
+position = Vector2( 64, 32 )
 
 [node name="LR" type="Node2D" parent="."]
 
@@ -161,6 +185,9 @@ tile_data = PoolIntArray( 0, 0, 327688, 1, 0, 196609, 2, 0, 327689, 3, 0, 327689
 
 [node name="Player" parent="LR/0" instance=ExtResource( 2 )]
 position = Vector2( 64, 80 )
+
+[node name="Bat" parent="LR/0" instance=ExtResource( 3 )]
+position = Vector2( 64, 40 )
 
 [node name="1" type="Node2D" parent="LR"]
 visible = false
@@ -189,11 +216,17 @@ visible = false
 [node name="RockyGrass" parent="LR/4" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 327688, 1, 0, 327689, 2, 0, 6, 3, 0, 1, 4, 0, 1, 5, 0, 327683, 6, 0, 1, 7, 0, 327684, 65538, 0, 131072, 65539, 0, 131073, 65540, 0, 131073, 65541, 0, 131073, 65542, 0, 131073, 65543, 0, 131074, 262145, 1, 0, 262148, 3, 0, 262149, 0, 327685, 262150, 0, 2, 262151, 3, 0, 327680, 0, 196608, 327681, 0, 196609, 327682, 0, 327689, 327683, 0, 327689, 327684, 0, 327689, 327685, 0, 196614, 327686, 0, 196613, 327687, 0, 327690 )
 
+[node name="Bat" parent="LR/4" instance=ExtResource( 3 )]
+position = Vector2( 16, 40 )
+
 [node name="5" type="Node2D" parent="LR"]
 visible = false
 
 [node name="RockyGrass" parent="LR/5" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 327688, 1, 0, 327689, 2, 0, 196609, 3, 0, 327689, 4, 0, 327689, 5, 0, 196609, 6, 0, 327689, 7, 0, 196610, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 262145, 0, 4, 262146, 0, 327689, 262147, 0, 327689, 262148, 0, 327689, 262149, 0, 7, 327680, 0, 327688, 327681, 0, 196615, 327685, 0, 196612, 327686, 0, 196609, 327687, 0, 196610 )
+
+[node name="Bat" parent="LR/5" instance=ExtResource( 3 )]
+position = Vector2( 24, 32 )
 
 [node name="6" type="Node2D" parent="LR"]
 visible = false
@@ -213,11 +246,17 @@ visible = false
 [node name="RockyGrass" parent="LR/8" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 196608, 1, 0, 196609, 2, 0, 6, 3, 0, 5, 4, 0, 196609, 5, 0, 327689, 6, 0, 327689, 7, 0, 327690, 65537, 3, 0, 65538, 0, 65536, 65539, 0, 65538, 65540, 1, 0, 131072, 0, 327688, 131073, 0, 6, 131074, 0, 65545, 131075, 0, 131074, 196609, 0, 131072, 196610, 0, 131074, 196611, 1, 0, 262147, 3, 0, 262148, 2, 0, 262149, 0, 327685, 262150, 0, 327683, 262151, 0, 327684, 327680, 0, 327688, 327681, 0, 327689, 327682, 0, 196609, 327683, 0, 196609, 327684, 0, 196609, 327685, 0, 196614, 327686, 0, 131073, 327687, 0, 131074 )
 
+[node name="Bat" parent="LR/8" instance=ExtResource( 3 )]
+position = Vector2( 104, 32 )
+
 [node name="9" type="Node2D" parent="LR"]
 visible = false
 
 [node name="RockyGrass" parent="LR/9" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 327688, 1, 0, 327689, 2, 0, 327689, 3, 0, 196609, 4, 0, 327689, 5, 0, 196609, 6, 0, 6, 7, 0, 2, 65542, 0, 131072, 65543, 0, 131074, 262144, 0, 3, 262145, 3, 0, 262147, 1, 0, 262148, 0, 327682, 262149, 0, 327684, 327680, 0, 196612, 327681, 0, 196609, 327682, 0, 196609, 327683, 0, 327689, 327684, 0, 196614, 327685, 0, 196613, 327686, 0, 327689, 327687, 0, 327690 )
+
+[node name="Bat" parent="LR/9" instance=ExtResource( 3 )]
+position = Vector2( 40, 32 )
 
 [node name="10" type="Node2D" parent="LR"]
 visible = false
@@ -245,11 +284,17 @@ visible = false
 [node name="RockyGrass" parent="LB/1" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 196608, 1, 0, 327689, 2, 0, 6, 3, 0, 327686, 4, 0, 5, 5, 0, 196609, 6, 0, 196609, 7, 0, 7, 65538, 0, 65540, 65539, 0, 131073, 65540, 0, 131074, 65543, 0, 65539, 131073, 0, 327688, 131074, 0, 196615, 131075, 1, 0, 131079, 0, 65539, 196615, 0, 65539, 262151, 0, 65539, 327680, 0, 196608, 327681, 0, 196610, 327687, 0, 131075 )
 
+[node name="Bat" parent="LB/1" instance=ExtResource( 3 )]
+position = Vector2( 80, 64 )
+
 [node name="2" type="Node2D" parent="LB"]
 visible = false
 
 [node name="RockyGrass" parent="LB/2" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 327688, 1, 0, 196609, 2, 0, 6, 3, 0, 5, 4, 0, 327689, 5, 0, 6, 6, 0, 1, 7, 0, 2, 65537, 1, 0, 65538, 0, 131072, 65539, 0, 131074, 65540, 1, 0, 65541, 0, 131072, 65542, 0, 65542, 65543, 0, 65538, 131078, 0, 131072, 131079, 0, 65543, 196615, 0, 65539, 262151, 0, 65539, 327680, 0, 196611, 327687, 0, 131075 )
+
+[node name="Bat" parent="LB/2" instance=ExtResource( 3 )]
+position = Vector2( 64, 48 )
 
 [node name="3" type="Node2D" parent="LB"]
 visible = false
@@ -263,12 +308,15 @@ visible = false
 [node name="RockyGrass" parent="LB/4" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 327688, 1, 0, 196609, 2, 0, 196609, 3, 0, 196609, 4, 0, 196609, 5, 0, 6, 6, 0, 327686, 7, 0, 2, 65541, 0, 131072, 65542, 0, 65542, 65543, 0, 65538, 131078, 0, 65536, 131079, 0, 65538, 196608, 3, 0, 196609, 0, 4, 196610, 0, 327689, 196611, 0, 196610, 196614, 0, 65536, 196615, 0, 65538, 262144, 0, 4, 262145, 0, 196615, 262146, 1, 0, 262150, 0, 131072, 262151, 0, 65543, 327680, 0, 131075, 327687, 0, 131075 )
 
+[node name="Bat" parent="LB/4" instance=ExtResource( 3 )]
+position = Vector2( 64, 88 )
+
 [node name="RB" type="Node2D" parent="."]
 
 [node name="0" type="Node2D" parent="RB"]
-visible = false
 
 [node name="RockyGrass" parent="RB/0" instance=ExtResource( 4 )]
+visible = false
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 1, 2, 0, 327686, 3, 0, 1, 4, 0, 5, 5, 0, 327689, 6, 0, 327689, 7, 0, 327690, 65536, 0, 65536, 65537, 0, 262145, 65538, 0, 65541, 65539, 0, 131073, 65540, 0, 131074, 131072, 0, 65536, 131073, 0, 65541, 131074, 0, 131074, 196608, 0, 65536, 196609, 0, 65538, 262144, 0, 65540, 262145, 0, 131074, 327680, 0, 131075 )
 
 [node name="1" type="Node2D" parent="RB"]
@@ -277,11 +325,17 @@ visible = false
 [node name="RockyGrass" parent="RB/1" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 5, 2, 0, 196609, 3, 0, 327689, 4, 0, 327689, 5, 0, 6, 6, 0, 5, 7, 0, 196610, 65536, 0, 65540, 65537, 0, 131074, 65541, 0, 65540, 65542, 0, 131074, 131072, 0, 65539, 131076, 3, 0, 131077, 0, 65539, 196608, 0, 65539, 196611, 0, 327688, 196612, 0, 327689, 196613, 0, 196615, 262144, 0, 65539, 327680, 0, 131075, 327687, 0, 196611 )
 
+[node name="Bat" parent="RB/1" instance=ExtResource( 3 )]
+position = Vector2( 56, 80 )
+
 [node name="2" type="Node2D" parent="RB"]
 visible = false
 
 [node name="RockyGrass" parent="RB/2" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 327682, 1, 0, 327683, 2, 0, 327686, 3, 0, 327686, 4, 0, 5, 5, 0, 327689, 6, 0, 196609, 7, 0, 196610, 65536, 0, 65536, 65537, 0, 65541, 65538, 0, 131073, 65539, 0, 131073, 65540, 0, 65543, 65541, 3, 0, 131072, 0, 65540, 131073, 0, 131074, 131075, 1, 0, 131076, 0, 196612, 131077, 0, 327689, 131078, 0, 327690, 196608, 0, 65539, 262144, 0, 65539, 327680, 0, 131075, 327687, 0, 196611 )
+
+[node name="Bat" parent="RB/2" instance=ExtResource( 3 )]
+position = Vector2( 64, 64 )
 
 [node name="3" type="Node2D" parent="RB"]
 visible = false
@@ -294,6 +348,9 @@ visible = false
 
 [node name="RockyGrass" parent="RB/4" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 327686, 2, 0, 327686, 3, 0, 5, 4, 0, 196609, 5, 0, 196609, 6, 0, 327689, 7, 0, 196610, 65536, 0, 65536, 65537, 0, 65541, 65538, 0, 131073, 65539, 0, 131074, 65540, 1, 0, 131072, 0, 65540, 131073, 0, 131074, 196608, 0, 65539, 196609, 1, 0, 262144, 0, 65539, 327680, 0, 131075, 327684, 0, 196608, 327685, 0, 196609, 327686, 0, 196609, 327687, 0, 327690 )
+
+[node name="Bat" parent="RB/4" instance=ExtResource( 3 )]
+position = Vector2( 80, 48 )
 
 [node name="LT" type="Node2D" parent="."]
 
@@ -399,6 +456,9 @@ visible = false
 [node name="Player" parent="LRB/0" instance=ExtResource( 2 )]
 position = Vector2( 104, 32 )
 
+[node name="Bat" parent="LRB/0" instance=ExtResource( 3 )]
+position = Vector2( 40, 40 )
+
 [node name="RockyGrass" parent="LRB/0" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 196608, 1, 0, 196609, 2, 0, 6, 3, 0, 5, 4, 0, 327689, 5, 0, 8, 6, 0, 196609, 7, 0, 196610, 65538, 0, 131072, 65539, 0, 131074, 65541, 0, 65539, 131077, 0, 196612, 131078, 0, 196610, 262145, 0, 327688, 262146, 0, 327690, 327685, 0, 196608, 327686, 0, 327689, 327687, 0, 327690 )
 
@@ -414,11 +474,17 @@ visible = false
 [node name="RockyGrass" parent="LRB/2" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 196608, 1, 0, 6, 2, 0, 5, 3, 0, 196609, 4, 0, 327689, 5, 0, 196609, 6, 0, 327689, 7, 0, 196610, 65537, 0, 131072, 65538, 0, 65543, 65542, 1, 0, 131074, 0, 196612, 131075, 0, 196610, 327680, 0, 196608, 327681, 0, 327690, 327683, 0, 196608, 327684, 0, 327690, 327686, 0, 196608, 327687, 0, 327690 )
 
+[node name="Bat" parent="LRB/2" instance=ExtResource( 3 )]
+position = Vector2( 96, 40 )
+
 [node name="3" type="Node2D" parent="LRB"]
 visible = false
 
 [node name="RockyGrass" parent="LRB/3" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 0, 327688, 1, 0, 196609, 2, 0, 327689, 3, 0, 327689, 4, 0, 196609, 5, 0, 327689, 6, 0, 327689, 7, 0, 196610, 65542, 1, 0, 196608, 0, 0, 196609, 0, 327684, 196612, 0, 327685, 196613, 0, 5, 196614, 0, 196610, 262144, 0, 65540, 262145, 0, 131074, 262147, 1, 0, 262148, 0, 131072, 262149, 0, 131074, 327680, 0, 131075 )
+
+[node name="Bat" parent="LRB/3" instance=ExtResource( 3 )]
+position = Vector2( 48, 32 )
 
 [node name="4" type="Node2D" parent="LRB"]
 visible = false
@@ -447,10 +513,12 @@ visible = false
 tile_data = PoolIntArray( 65540, 0, 196608, 65541, 0, 327690, 196609, 0, 327688, 196610, 0, 196610, 262148, 0, 196608, 262149, 0, 196610 )
 
 [node name="3" type="Node2D" parent="LRBT"]
+visible = false
 
 [node name="RockyGrass" parent="LRBT/3" instance=ExtResource( 4 )]
 
 [node name="4" type="Node2D" parent="LRBT"]
+visible = false
 
 [node name="RockyGrass" parent="LRBT/4" instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 0, 1, 0, 7, 1, 0, 327680, 1, 0, 327687, 1, 0 )
