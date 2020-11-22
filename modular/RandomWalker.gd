@@ -1,6 +1,7 @@
 extends Node2D
 class_name RandomRoomWalker
 
+export(float, 0, 1) var enemy_spawn_multiplier = 1
 export(NodePath) var background_path
 export(NodePath) var walls_path
 export(PackedScene) var ModularScene
@@ -197,8 +198,15 @@ func _place_room(gridv: Vector2, incoming := [], outgoing := []):
 			_objects.add_child(_player)
 			emit_signal("player_placed", _player.get_path())
 			continue
-		elif obj.is_in_group("enemy") and in_player_room:
-			continue
+		if obj.is_in_group("enemy"):
+			if in_player_room:
+				continue
+			var enemy_spawn_chance: float = obj.get("spawn_chance")
+			if not enemy_spawn_chance:
+				enemy_spawn_chance = 1.0
+			if not _rng.randf() <= enemy_spawn_chance * enemy_spawn_multiplier:
+				continue
+			
 		var child: Node2D = obj.duplicate()
 		child.global_position += obj_offset
 		_objects.add_child(child)
