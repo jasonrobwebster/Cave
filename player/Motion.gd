@@ -1,6 +1,5 @@
 extends "res://player/PlayerState.gd"
 
-const TARGET_FPS := 60
 const MAX_FALL_SPEED := 400
 const MAX_MOVE_SPEED := 64
 const MAX_DECCELERATION := 50
