@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://player/platformer.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
@@ -12,12 +12,64 @@
 [ext_resource path="res://player/Fall.gd" type="Script" id=10]
 [ext_resource path="res://player/Land.gd" type="Script" id=11]
 [ext_resource path="res://lights/light_strong2.png" type="Texture" id=12]
+[ext_resource path="res://player/CarryIdle.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 1 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3, 5 )
+
+[sub_resource type="Animation" id=18]
+resource_name = "CarryIdle"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 42 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "CarryThrow"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 55, 56 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "CarryWalk"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 51, 52, 53 ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.2
@@ -369,14 +421,17 @@ script = ExtResource( 10 )
 [node name="Land" type="Node" parent="StateMachine"]
 script = ExtResource( 11 )
 
+[node name="CarryIdle" type="Node" parent="StateMachine"]
+script = ExtResource( 13 )
+
 [node name="Pivot" type="Position2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Pivot"]
 position = Vector2( 1, -8 )
 texture = ExtResource( 1 )
-vframes = 7
+vframes = 10
 hframes = 6
-frame = 18
+frame = 42
 
 [node name="Light2D" type="Light2D" parent="Pivot"]
 position = Vector2( 0, -6 )
@@ -402,10 +457,14 @@ collision_mask = 0
 shape = SubResource( 1 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -5 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/CarryIdle = SubResource( 18 )
+anims/CarryThrow = SubResource( 19 )
+anims/CarryWalk = SubResource( 20 )
 anims/Climb = SubResource( 3 )
 anims/FallDown = SubResource( 4 )
 anims/FallForwardDown = SubResource( 5 )
@@ -434,6 +493,7 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="Hurtbox" parent="." instance=ExtResource( 7 )]
+visible = false
 collision_layer = 8
 collision_mask = 0
 
