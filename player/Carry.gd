@@ -43,6 +43,7 @@ func _on_PickupItem(item, parent):
 		offset = Vector2.ZERO
 	item.position = offset
 	item.mode = RigidBody2D.MODE_KINEMATIC
+	item.contact_monitor = false
 
 
 func _on_DropItem():
@@ -63,4 +64,5 @@ func _throw(throw_velocity: Vector2):
 		offset = Vector2.ZERO
 	_carrying.global_position = carry_pivot.global_position + offset
 	_carrying.mode = RigidBody2D.MODE_RIGID
+	_carrying.contact_monitor = true
 	_carrying.linear_velocity = throw_velocity
