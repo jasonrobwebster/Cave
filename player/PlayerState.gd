@@ -8,6 +8,8 @@ onready var pivot: Position2D = owner.get_node("Pivot")
 onready var anim_player: AnimationPlayer = owner.get_node("AnimationPlayer")
 onready var collision: CollisionShape2D = owner.get_node("Collision")
 onready var coyote_timer: Timer = owner.get_node("CoyoteTimer")
+onready var interact_zone : Area2D = owner.get_node("Pivot/InteractZone")
+onready var carry_pivot: Position2D = owner.get_node("Pivot/CarryPivot")
 
 
 func _get_input_x() -> float:
