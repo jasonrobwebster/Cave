@@ -54,7 +54,16 @@ position = Vector2( 104, 24 )
 position = Vector2( 104, 168 )
 
 [node name="Pot" parent="." instance=ExtResource( 11 )]
-position = Vector2( 153, 93 )
+position = Vector2( 87, 93 )
 
 [node name="Pot2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 88, 93 )
+position = Vector2( 134, 108 )
+
+[node name="Pot3" parent="." instance=ExtResource( 11 )]
+position = Vector2( 116, 108 )
+
+[node name="Pot4" parent="." instance=ExtResource( 11 )]
+position = Vector2( 120, 108 )
+
+[node name="Pot5" parent="." instance=ExtResource( 11 )]
+position = Vector2( 67, 77 )
