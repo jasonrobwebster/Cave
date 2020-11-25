@@ -43,7 +43,6 @@ func update(delta):
 		emit_signal("state_change", "Land", velocity)
 	
 	if can_hold and fall_speed < HOLD_SPEED and owner.is_on_wall():
-		velocity = Vector2.ZERO
 		emit_signal("state_change", "Hold")
 	
 	_calculate_velocity(delta, ACCELERATION, FRICTION)
