@@ -8,7 +8,7 @@
 [node name="Enemy" type="KinematicBody2D" groups=[
 "enemy",
 ]]
-collision_layer = 0
+collision_layer = 64
 script = ExtResource( 3 )
 
 [node name="StateMachine" type="Node" parent="."]
