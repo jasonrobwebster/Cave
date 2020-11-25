@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pot_metal.png-33fc995f890ae6d2dad6853b72a4f52d.stex"
+path="res://.import/pots_sheet.png-4b1f0e0d6adee58cc335907937b6a80c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment/pots/pot_metal.png"
-dest_files=[ "res://.import/pot_metal.png-33fc995f890ae6d2dad6853b72a4f52d.stex" ]
+source_file="res://environment/pots/pots_sheet.png"
+dest_files=[ "res://.import/pots_sheet.png-4b1f0e0d6adee58cc335907937b6a80c.stex" ]
 
 [params]
 
