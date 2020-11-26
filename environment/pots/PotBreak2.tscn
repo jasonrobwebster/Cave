@@ -3,51 +3,54 @@
 [ext_resource path="res://environment/pots/pot_pieces.png" type="Texture" id=1]
 [ext_resource path="res://environment/pots/PotBreak.gd" type="Script" id=2]
 
-[node name="PotBreak1" type="Node2D"]
+[node name="PotBreak2" type="Node2D"]
 script = ExtResource( 2 )
+variant = 1
 
 [node name="PotPieceBottom" type="RigidBody2D" parent="."]
+position = Vector2( 0, 2 )
 collision_layer = 0
 
 [node name="Sprite" type="Sprite" parent="PotPieceBottom"]
-position = Vector2( 0, -4 )
+position = Vector2( 0, -6 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 6
+frame = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PotPieceBottom"]
-position = Vector2( 0, -4 )
-polygon = PoolVector2Array( -3, 5, 0, 2, 1, 2, 3, 4, 3, 6, 2, 7, -2, 7, -3, 6 )
+position = Vector2( 0, -6 )
+polygon = PoolVector2Array( -1, 5, 1, 5, 2, 6, 2, 7, -2, 7, -2, 6 )
 
 [node name="PotPieceLeft" type="RigidBody2D" parent="."]
-position = Vector2( -1, -3 )
+position = Vector2( -2, -1 )
 collision_layer = 0
 
 [node name="Sprite" type="Sprite" parent="PotPieceLeft"]
-position = Vector2( 0.734835, -1.13258 )
+position = Vector2( 2, -3 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 6
-frame = 6
+frame = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PotPieceLeft"]
-position = Vector2( 1, -1 )
-polygon = PoolVector2Array( -3, 4, 0, 1, 0, -2, -1, -2, -1, 1, -2, 1, -3, 2 )
+position = Vector2( 2, -3 )
+polygon = PoolVector2Array( -2, 1, 0, 3, 0, 4, -1, 5, -3, 5, -3, 2 )
 
 [node name="PotPieceRight" type="RigidBody2D" parent="."]
-position = Vector2( 1.26516, -4.13258 )
+position = Vector2( 1, -2 )
 collision_layer = 0
 
 [node name="Sprite" type="Sprite" parent="PotPieceRight"]
-position = Vector2( -1, 0 )
+position = Vector2( -1, -2 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 6
-frame = 12
+frame = 13
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PotPieceRight"]
-position = Vector2( -1, 0 )
-polygon = PoolVector2Array( 3, 3, 0, 0, 0, -2, 1, -2, 1, 0, 3, 2 )
+position = Vector2( -1, -2 )
+polygon = PoolVector2Array( -1, -2, -1, 1, 0, 2, 0, 4, 1, 5, 3, 5, 3, 2, 1, 0, 1, -2 )
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
