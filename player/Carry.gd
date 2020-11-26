@@ -57,6 +57,8 @@ func _drop():
 
 
 func _throw(throw_velocity: Vector2):
+	if not _carrying:
+		return
 	carry_pivot.remove_child(_carrying)
 	_carrying_parent.add_child(_carrying)
 	var offset = _carrying.get("pickup_offset")
