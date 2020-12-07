@@ -1,4 +1,4 @@
-extends State
+extends %BASE%
 
 
 func enter(_previous_state: String = '', _args = null):
