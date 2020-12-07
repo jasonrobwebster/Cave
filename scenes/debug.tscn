@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/pots/RandomPot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tiles/wood/WoodenLogs.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/PlayerUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://camera/Camera2D.tscn" type="PackedScene" id=6]
@@ -9,6 +10,8 @@
 [ext_resource path="res://tiles/rockygrass/RockyGrass.tscn" type="PackedScene" id=8]
 [ext_resource path="res://tiles/rockyback/RockyBack.tscn" type="PackedScene" id=9]
 [ext_resource path="res://enemies/bat/Bat.tscn" type="PackedScene" id=10]
+[ext_resource path="res://tiles/wood/WoodenPlankBG.tscn" type="PackedScene" id=11]
+[ext_resource path="res://tiles/wood/WoodenPlankFG.tscn" type="PackedScene" id=12]
 
 [node name="debug" type="Node2D"]
 
@@ -31,6 +34,15 @@ remote_path = NodePath("../../Camera2D")
 [node name="RockyGrass" parent="." instance=ExtResource( 8 )]
 z_index = 15
 tile_data = PoolIntArray( 196614, 0, 196608, 196615, 0, 327690, 262154, 0, 3, 327684, 0, 3, 327690, 0, 65539, 393220, 0, 131076, 393221, 0, 327687, 393222, 2, 0, 393223, 2, 0, 393224, 2, 0, 393225, 0, 327685, 393226, 0, 131080, 393227, 0, 327687, 393228, 3, 0, 458752, 0, 196608, 458753, 0, 7, 458756, 0, 65536, 458757, 0, 131077, 458758, 0, 327683, 458759, 0, 327683, 458760, 0, 327683, 458761, 0, 131078, 458762, 0, 65537, 458763, 0, 131077, 458764, 0, 327687, 458765, 2, 0, 524289, 0, 65539, 524292, 0, 65536, 524293, 0, 65537, 524294, 0, 65537, 524295, 0, 65537, 524296, 0, 65537, 524297, 0, 65537, 524298, 0, 65541, 524299, 0, 131073, 524300, 0, 196613, 524301, 0, 196610, 589825, 0, 65539, 589828, 0, 65540, 589829, 0, 131073, 589830, 0, 131073, 589831, 0, 131073, 589832, 0, 131073, 589833, 0, 131073, 589834, 0, 65543, 655361, 0, 65539, 655364, 0, 65539, 655370, 0, 65539, 720897, 0, 131075, 720900, 0, 196612, 720901, 0, 196609, 720902, 0, 196609, 720903, 0, 327689, 720904, 0, 196609, 720905, 0, 327689, 720906, 0, 196615, 851969, 0, 196611, 851972, 0, 196611 )
+
+[node name="WoodenLogs" parent="." instance=ExtResource( 3 )]
+tile_data = PoolIntArray( 262158, 0, 4, 262159, 0, 196609, 262160, 0, 8, 262161, 0, 196610, 327693, 0, 196608, 327694, 0, 196615, 327696, 0, 65539, 393232, 0, 65539, 458767, 0, 0, 458768, 0, 131079, 524303, 0, 65536, 524304, 0, 65538, 589836, 0, 196608, 589837, 0, 196609, 589838, 0, 196609, 589839, 0, 196614, 589840, 0, 131074 )
+
+[node name="WoodenPlankBG" parent="." instance=ExtResource( 11 )]
+tile_data = PoolIntArray( 327692, 0, 0, 327693, 0, 1, 327694, 0, 1, 327695, 0, 1, 327696, 0, 2, 393227, 0, 196608, 393228, 0, 262150, 393229, 0, 65537, 393230, 0, 65537, 393231, 0, 65541, 393232, 0, 131074, 458764, 0, 65536, 458765, 0, 65537, 458766, 0, 65537, 458767, 0, 65538, 524300, 0, 131072, 524301, 0, 131073, 524302, 0, 131073, 524303, 0, 196613, 524304, 0, 196610 )
+
+[node name="WoodenPlankFG" parent="." instance=ExtResource( 12 )]
+tile_data = PoolIntArray( 196614, 0, 2, 262150, 0, 65538, 327686, 0, 65536, 393222, 0, 65536, 458758, 0, 131073, 589833, 0, 2, 655369, 0, 65537, 720905, 0, 131073 )
 
 [node name="CameraPivot" parent="." instance=ExtResource( 6 )]
 player_path = NodePath("../Player")
@@ -55,6 +67,9 @@ position = Vector2( 104, 168 )
 
 [node name="RandomPot" parent="." instance=ExtResource( 2 )]
 position = Vector2( 154, 96 )
+
+[node name="RandomPot9" parent="." instance=ExtResource( 2 )]
+position = Vector2( 249, 112 )
 
 [node name="RandomPot2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 150, 96 )
