@@ -56,6 +56,8 @@ func _type_animation() -> String:
 
 
 func _break_pot():
+	if !contact_monitor:
+		return
 	var lv := linear_velocity
 	if lv.length() > BREAK_SPEED:
 		var broken = BREAK_SCENES[randi() % len(BREAK_SCENES)].instance()
@@ -68,5 +70,4 @@ func _break_pot():
 
 
 func _on_Pot_body_entered(body):
-	if contact_monitor:
-		_break_pot()
+	_break_pot()
