@@ -38,7 +38,7 @@ func _reset_player_rooms():
 
 
 func get_valid_types(incoming: Array, outgoing: Array, 
-force_player: bool = false, allow_empty: bool = false) -> Array:
+force_player: bool = false) -> Array:
 	var valid_types := Type.duplicate()
 	
 	for v in incoming:
