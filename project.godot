@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://enemies/Enemy.gd"
 }, {
+"base": "State",
+"class": "EnemyBaseState",
+"language": "GDScript",
+"path": "res://enemies/BaseState.gd"
+}, {
 "base": "Area2D",
 "class": "Hitbox",
 "language": "GDScript",
@@ -57,6 +62,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "ActionSpace": "",
 "Enemy": "",
+"EnemyBaseState": "",
 "Hitbox": "",
 "Hurtbox": "",
 "ModularRooms": "",
