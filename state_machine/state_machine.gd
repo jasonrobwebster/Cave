@@ -27,6 +27,7 @@ func initialise(start_path: NodePath):
 	_assign_state_map()
 	_init_states()
 	current_state = get_node(start_path)
+	current_state.active = true
 	current_state.enter()
 
 
