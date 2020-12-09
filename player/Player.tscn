@@ -440,6 +440,15 @@ script = ExtResource( 14 )
 [node name="CarryThrow" type="Node" parent="StateMachine"]
 script = ExtResource( 15 )
 
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, -7 )
+texture = ExtResource( 12 )
+mode = 2
+shadow_enabled = true
+shadow_gradient_length = 5.0
+shadow_filter = 5
+shadow_filter_smooth = 40.0
+
 [node name="Pivot" type="Position2D" parent="."]
 
 [node name="CarryPivot" type="Position2D" parent="Pivot"]
@@ -451,12 +460,6 @@ texture = ExtResource( 1 )
 vframes = 10
 hframes = 6
 frame = 56
-
-[node name="Light2D" type="Light2D" parent="Pivot"]
-position = Vector2( 0, -6 )
-texture = ExtResource( 12 )
-mode = 2
-shadow_enabled = true
 
 [node name="HoldTop" type="Area2D" parent="Pivot"]
 position = Vector2( 5, -12 )
