@@ -1,10 +1,4 @@
-extends State
-
-const IMAGE_VBUFFER := 5
-
-var velocity: Vector2 = Vector2.ZERO
-
-var _rng = RandomNumberGenerator.new()
+extends EnemyBaseState
 
 onready var pivot: Position2D = owner.get_node("BodyPivot")
 onready var sprite: Sprite = owner.get_node("BodyPivot/Sprite")
@@ -25,20 +19,7 @@ func _ready():
 
 func update(delta):
 	_move()
-	_update_image()
-
-
-func _move():
-	velocity = owner.move_and_slide(
-		velocity
-	)
-
-
-func _update_image():
-	if velocity.x <= -IMAGE_VBUFFER:
-		pivot.scale.x = -1
-	elif velocity.x >= IMAGE_VBUFFER:
-		pivot.scale.x = 1
+	_update_pivot(pivot)
 
 
 func _on_PlayerDetection_body_entered(body: Node):
