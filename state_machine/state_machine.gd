@@ -64,7 +64,7 @@ func _change_state(state_name, args = null):
 	if current_state == state_map[state_name]:
 		return
 	var previous_state: State = current_state
-	current_state.exit()
+	previous_state.exit()
 	current_state = state_map[state_name]
 	
 	previous_state.active = false
