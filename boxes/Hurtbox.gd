@@ -26,7 +26,7 @@ func _on_Hurtbox_area_entered(area: Hitbox):
 
 
 func _on_Hurtbox_invincibility_started():
-	$Timer.start(invincible_time)
+	$InvincibilityTimer.start(invincible_time)
 	if invincible_time > 0:
 		set_deferred("monitoring", false)
 
