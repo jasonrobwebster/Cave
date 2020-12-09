@@ -20,7 +20,9 @@ script = ExtResource( 4 )
 
 [node name="Attack" type="Node" parent="StateMachine"]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Pivot" type="Position2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Pivot"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
