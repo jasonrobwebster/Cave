@@ -30,6 +30,7 @@ bbox = Vector2( 5, 4 )
 
 [node name="EnemyPlacer" type="Node2D" parent="."]
 script = ExtResource( 7 )
+path_room_spawn_multiplier = 0.7
 ground_enemies = [ ExtResource( 9 ) ]
 flying_enemies = [ ExtResource( 8 ) ]
 treasures = [ ExtResource( 10 ) ]
