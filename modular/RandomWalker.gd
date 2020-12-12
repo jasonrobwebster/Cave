@@ -11,6 +11,7 @@ var start_room: Vector2
 var player_room: Vector2
 var end_room: Vector2
 var path := []
+var treasure := []
 var moves := []
 
 var _empty_rooms := []
@@ -174,6 +175,7 @@ func _place_background():
 func _fill_empty():
 	for roomv in _empty_rooms:
 		_place_room(roomv)
+		treasure.push_back(roomv)
 
 
 func _place_room(gridv: Vector2, incoming := [], outgoing := []):
