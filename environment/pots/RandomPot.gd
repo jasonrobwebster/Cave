@@ -3,7 +3,7 @@ extends Position2D
 export(float, 0, 1) var WOODEN_CHANCE = 0.9
 export(float, 0, 1) var METAL_CHANCE = 0.09
 
-export(float, 0, 1) var spawn_chance = 0.9
+export(float, 0, 1) var spawn_chance = 1
 
 var _rng = RandomNumberGenerator.new()
 

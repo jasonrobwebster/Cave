@@ -5,7 +5,6 @@
 
 [node name="RandomPot" type="Position2D"]
 script = ExtResource( 2 )
-spawn_chance = 0.8
 
 [node name="Pot" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -3 )

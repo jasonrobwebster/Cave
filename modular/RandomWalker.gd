@@ -1,6 +1,10 @@
 extends Node2D
 class_name RandomRoomWalker
 
+signal level_finished
+signal level_finalised(path_rooms, treasure_rooms, player_room, room_size, tile_size)
+signal player_placed(player_path)
+
 export(float, 0, 1) var enemy_spawn_multiplier = 1
 export(NodePath) var background_path
 export(NodePath) var walls_path
@@ -11,6 +15,7 @@ var start_room: Vector2
 var player_room: Vector2
 var end_room: Vector2
 var path := []
+var treasure := []
 var moves := []
 
 var _empty_rooms := []
@@ -36,9 +41,6 @@ onready var _room_space := ActionSpace.new(
 	[1, 1, 3, 1, 1, 1, 1, 1, 1, 0.5],  #{L, R, LR, LB, RB, LT, RT, LRT, LRB, LRBT}
 	_room_mask
 )
-
-signal level_finished
-signal player_placed(player_path)
 
 
 func _ready():
@@ -77,6 +79,14 @@ func _generate_level():
 	_place_background()
 	_fill_empty()
 	emit_signal("level_finished")
+	emit_signal(
+		"level_finalised",
+		path.duplicate(),
+		treasure.duplicate(),
+		player_room,
+		_rooms.room_size,
+		_rooms.tile_size
+	)
 
 
 func _reset():
@@ -174,6 +184,7 @@ func _place_background():
 func _fill_empty():
 	for roomv in _empty_rooms:
 		_place_room(roomv)
+		treasure.push_back(roomv)
 
 
 func _place_room(gridv: Vector2, incoming := [], outgoing := []):

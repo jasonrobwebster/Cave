@@ -50,3 +50,4 @@ func _build_tilemap_from_random_cells():
 		set_cellv(v, _info.cell)
 	
 	update_bitmask_region()
+	update_dirty_quadrants()
