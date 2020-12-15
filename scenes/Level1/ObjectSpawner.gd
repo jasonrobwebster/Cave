@@ -3,6 +3,7 @@ extends Node2D
 
 export(float, 0, 1) var path_room_spawn_multiplier = 1
 export(float, 0, 1) var treasure_room_spawn_multiplier = 1
+export(float, 0, 1) var enemy_spawn_mult = 1
 export(Array, PackedScene) var ground_enemies = []
 export(Array, PackedScene) var rooftop_enemies = []
 export(Array, PackedScene) var wall_enemies = []
@@ -14,9 +15,6 @@ enum Placement {
 }
 
 const SPAWN_CHANCE_DEFAULT := 0.1
-
-var find_collision := false
-var printing := true
 
 var _path: PoolVector2Array
 var _treasure: PoolVector2Array
@@ -64,7 +62,7 @@ func _spawn_enemies(
 		var spawn_chance = enemy.get("spawn_chance")
 		if not spawn_chance:
 			spawn_chance = SPAWN_CHANCE_DEFAULT
-		if _rng.randf() > spawn_chance * spawn_mult:
+		if _rng.randf() > spawn_chance * spawn_mult * enemy_spawn_mult:
 			enemy.queue_free()
 			continue
 		enemy.global_position = point + place_offset
@@ -85,7 +83,6 @@ func _place_treasures(treasures: Array, points: Array, empty_points: Array):
 		var surrounding_empty := _count_surrounding_empty_points(point, empty_points)
 		var surrounding_fill := 4 - surrounding_empty - 1
 		var proportion_fill := surrounding_fill / 3
-		print(proportion_fill, " ", spawn_chance * spawn_mult * proportion_fill)
 		if _rng.randf() > spawn_chance * spawn_mult * proportion_fill:
 			treasure.queue_free()
 			continue
