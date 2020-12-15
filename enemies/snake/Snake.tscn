@@ -13,7 +13,7 @@ radius = 4.0
 radius = 4.0
 
 [node name="Snake" instance=ExtResource( 2 )]
-spawn_chance = 0.05
+spawn_chance = 0.1
 
 [node name="Idle" parent="StateMachine" index="0"]
 script = ExtResource( 3 )
