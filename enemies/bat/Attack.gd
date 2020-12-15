@@ -27,12 +27,14 @@ func enter(previous_state: String = '', player: Node = null):
 	timer.start(CHARGE_TIME)
 	maxtimer.start(MAX_TIME)
 	maxtimer.connect("timeout", self, "_on_MaxTimer_timeout")
+	hitbox.monitorable = true
 
 
 func exit():
 	velocity = Vector2.ZERO
 	maxtimer.disconnect("timeout", self, "_on_MaxTimer_timeout")
 	player_detection.monitoring = true
+	hitbox.set_deferred("monitorable", false)
 
 
 func update(delta: float):

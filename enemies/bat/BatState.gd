@@ -7,6 +7,7 @@ onready var start_pos: Vector2 = owner.global_position
 onready var player_detection: Area2D = owner.get_node("PlayerDetection")
 onready var player_chase: Area2D = owner.get_node("PlayerChase")
 onready var line_of_sight: RayCast2D = owner.get_node("LineOfSight")
+onready var hitbox: Area2D = owner.get_node("BodyPivot/Hitbox")
 
 
 func _ready():
