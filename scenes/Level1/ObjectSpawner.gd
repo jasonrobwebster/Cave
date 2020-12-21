@@ -55,6 +55,12 @@ func _spawn_enemies(
 	if not enemies:
 		return
 	for point in points:
+		if placement == Placement.FLOOR:
+			if not (
+				(point + _tile_size.project(Vector2.RIGHT) in points)
+				or (point - _tile_size.project(Vector2.RIGHT) in points)
+			):
+				continue
 		if _worldv_to_roomv(point) == _player_room:
 			continue
 		var spawn_mult := _get_spawn_multiplier(point)
