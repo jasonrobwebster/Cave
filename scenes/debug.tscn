@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://environment/pots/RandomPot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://equippable/throwable/pot/WoodenPot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tiles/wood/WoodenLogs.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/PlayerUI.tscn" type="PackedScene" id=5]
@@ -14,6 +14,8 @@
 [ext_resource path="res://tiles/wood/WoodenPlankFG.tscn" type="PackedScene" id=12]
 [ext_resource path="res://enemies/snake/Snake.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/debug.gd" type="Script" id=14]
+[ext_resource path="res://equippable/throwable/pot/SilverPot.tscn" type="PackedScene" id=15]
+[ext_resource path="res://equippable/throwable/pot/GoldPot.tscn" type="PackedScene" id=16]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
@@ -72,35 +74,29 @@ position = Vector2( 104, 24 )
 [node name="Bat4" parent="." instance=ExtResource( 10 )]
 position = Vector2( 104, 168 )
 
-[node name="RandomPot" parent="." instance=ExtResource( 2 )]
-position = Vector2( 154, 96 )
-
-[node name="RandomPot9" parent="." instance=ExtResource( 2 )]
-position = Vector2( 249, 112 )
-
-[node name="RandomPot2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 150, 96 )
-
-[node name="RandomPot3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 137, 111 )
-
-[node name="RandomPot4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 127, 111 )
-
-[node name="RandomPot5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 116, 111 )
-
-[node name="RandomPot6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 104, 111 )
-
-[node name="RandomPot7" parent="." instance=ExtResource( 2 )]
-position = Vector2( 171, 64 )
-
-[node name="RandomPot8" parent="." instance=ExtResource( 2 )]
-position = Vector2( 164, 64 )
-
 [node name="Snake" parent="." instance=ExtResource( 13 )]
 position = Vector2( 115, 111 )
 
 [node name="Snake2" parent="." instance=ExtResource( 13 )]
 position = Vector2( 17, 112 )
+
+[node name="WoodenPot" parent="." groups=[
+"equipable",
+] instance=ExtResource( 2 )]
+position = Vector2( 152, 91 )
+collision_layer = 128
+equip_type = 2
+
+[node name="SilverPot" parent="." groups=[
+"equipable",
+] instance=ExtResource( 15 )]
+position = Vector2( 168, 58 )
+collision_layer = 128
+equip_type = 2
+
+[node name="GoldPot" parent="." groups=[
+"equipable",
+] instance=ExtResource( 16 )]
+position = Vector2( 120, 43 )
+collision_layer = 128
+equip_type = 2
