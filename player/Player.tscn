@@ -454,9 +454,6 @@ shadow_filter_smooth = 40.0
 
 [node name="Pivot" type="Position2D" parent="."]
 
-[node name="CarryPivot" type="Position2D" parent="Pivot"]
-position = Vector2( 1, -14 )
-
 [node name="Sprite" type="Sprite" parent="Pivot"]
 material = SubResource( 1 )
 position = Vector2( 1, -8 )
@@ -464,6 +461,9 @@ texture = ExtResource( 1 )
 vframes = 10
 hframes = 6
 frame = 56
+
+[node name="CarryPivot" type="Position2D" parent="Pivot"]
+position = Vector2( 0, -6 )
 
 [node name="HoldTop" type="Area2D" parent="Pivot"]
 position = Vector2( 5, -12 )
