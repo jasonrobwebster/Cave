@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://equippable/throwable/pot/pots_sheet.png" type="Texture" id=1]
+[ext_resource path="res://equippable/throwable/ThrowableBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://equippable/throwable/pot/Pot.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 3.0
+
+[node name="Pot" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+
+[node name="Unequipped" parent="StateMachine" index="0"]
+THROW_SPEED = 500.0
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -4 )
+vframes = 4
+hframes = 4
+
+[node name="Collision" parent="." index="2"]
+shape = SubResource( 1 )
