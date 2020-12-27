@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://equippable/throwable/pot/BasePot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://equippable/throwable/pot/pots_sheet.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 16, 16 )
+margin = Rect2( 4, -2, 0, 0 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "Shine"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.6, 1.7, 1.8, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 12, 13, 14, 15 ]
+}
+
+[node name="GoldPot" instance=ExtResource( 1 )]
+spawn_chance = 0.1
+value = 1600
+
+[node name="Equipped" parent="StateMachine" index="1"]
+UI_texture = SubResource( 2 )
+
+[node name="Sprite" parent="." index="1"]
+frame = 15
+
+[node name="Collision" parent="." index="2"]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+anims/Shine = SubResource( 1 )

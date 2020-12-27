@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://equippable/throwable/pot/BasePot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://equippable/throwable/pot/pots_sheet.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+margin = Rect2( 4, -2, 0, 0 )
+filter_clip = true
+
+[node name="WoodenPot" instance=ExtResource( 1 )]
+spawn_chance = 0.8
+
+[node name="Equipped" parent="StateMachine" index="1"]
+UI_texture = SubResource( 1 )

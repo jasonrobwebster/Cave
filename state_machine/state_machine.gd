@@ -18,7 +18,7 @@ func _ready():
 	if not start_state:
 		start_state = get_child(0).get_path()
 	for child in get_children():
-		child.connect("state_change", self, "_change_state")
+		child.connect("state_change", self, "change_state")
 	initialise(start_state)
 
 
@@ -58,7 +58,7 @@ func _init_states():
 		child.active = false
 
 
-func _change_state(state_name, args = null):
+func change_state(state_name, args = null):
 	if not active:
 		return
 	if current_state == state_map[state_name]:
