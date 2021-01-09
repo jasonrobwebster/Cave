@@ -80,23 +80,11 @@ position = Vector2( 115, 111 )
 [node name="Snake2" parent="." instance=ExtResource( 13 )]
 position = Vector2( 17, 112 )
 
-[node name="WoodenPot" parent="." groups=[
-"equipable",
-] instance=ExtResource( 2 )]
+[node name="WoodenPot" parent="." instance=ExtResource( 2 )]
 position = Vector2( 152, 91 )
-collision_layer = 128
-equip_type = 2
 
-[node name="SilverPot" parent="." groups=[
-"equipable",
-] instance=ExtResource( 15 )]
+[node name="SilverPot" parent="." instance=ExtResource( 15 )]
 position = Vector2( 168, 58 )
-collision_layer = 128
-equip_type = 2
 
-[node name="GoldPot" parent="." groups=[
-"equipable",
-] instance=ExtResource( 16 )]
+[node name="GoldPot" parent="." instance=ExtResource( 16 )]
 position = Vector2( 120, 43 )
-collision_layer = 128
-equip_type = 2
