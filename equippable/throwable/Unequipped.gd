@@ -12,6 +12,7 @@ func enter(_previous_state: String = '', pos = null):
 		_thrown = false
 		return
 	_thrown = true
+	owner.can_equip = false
 	_direction = owner.global_position.direction_to(pos)
 	velocity = Vector2.ZERO
 

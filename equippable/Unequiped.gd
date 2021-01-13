@@ -1,6 +1,5 @@
 extends "res://equippable/State.gd"
 
-
 func enter(_previous_state: String = '', args = null):
 	# handle entering state
 	pass

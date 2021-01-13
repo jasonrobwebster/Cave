@@ -6,12 +6,15 @@ enum EquipType {TOOL, WEAPON, THROWABLE}
 export(PackedScene) var debris_scene
 export(EquipType) var equip_type
 export(float, 0, 1) var spawn_chance = 1
+export(bool) var can_equip = true
 
 onready var state_machine: StateMachine = $StateMachine
 
 
 func equip(new_parent: Node2D):
 	if state_machine.current_state.name == 'Equipped':
+		return
+	if not can_equip:
 		return
 	state_machine.change_state("Equipped", new_parent)
 

@@ -8,7 +8,7 @@
 [node name="EquipableBase" type="KinematicBody2D" groups=[
 "equipable",
 ]]
-collision_layer = 128
+collision_layer = 256
 script = ExtResource( 1 )
 
 [node name="StateMachine" type="Node" parent="."]
