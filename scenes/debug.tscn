@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://equippable/throwable/pot/WoodenPot.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://scenes/debug.gd" type="Script" id=14]
 [ext_resource path="res://equippable/throwable/pot/SilverPot.tscn" type="PackedScene" id=15]
 [ext_resource path="res://equippable/throwable/pot/GoldPot.tscn" type="PackedScene" id=16]
+[ext_resource path="res://interactable/doorways/Level1/Doorway.tscn" type="PackedScene" id=17]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
@@ -82,9 +83,16 @@ position = Vector2( 17, 112 )
 
 [node name="WoodenPot" parent="." instance=ExtResource( 2 )]
 position = Vector2( 152, 91 )
+equip_type = 2
 
 [node name="SilverPot" parent="." instance=ExtResource( 15 )]
 position = Vector2( 168, 58 )
+equip_type = 2
+
+[node name="Doorway" parent="." instance=ExtResource( 17 )]
+position = Vector2( 136, 111 )
+next_level = "res://scenes/Level1/Default.tscn"
 
 [node name="GoldPot" parent="." instance=ExtResource( 16 )]
 position = Vector2( 120, 43 )
+equip_type = 2
