@@ -23,7 +23,7 @@ light_mode = 1
 extents = Vector2( 1, 1 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 6, 10 )
+extents = Vector2( 8, 8 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 3, 5 )
@@ -466,6 +466,7 @@ frame = 56
 position = Vector2( 0, -6 )
 
 [node name="HoldTop" type="Area2D" parent="Pivot"]
+visible = false
 position = Vector2( 5, -12 )
 collision_mask = 0
 
@@ -474,23 +475,25 @@ position = Vector2( -1, 0 )
 shape = SubResource( 2 )
 
 [node name="HoldBottom" type="Area2D" parent="Pivot"]
+visible = false
 position = Vector2( 4, -10 )
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/HoldBottom"]
 shape = SubResource( 2 )
 
-[node name="InteractZone" type="Area2D" parent="Pivot"]
+[node name="EquippableZone" type="Area2D" parent="Pivot"]
 visible = false
 position = Vector2( 4, -7 )
 collision_layer = 0
-collision_mask = 128
+collision_mask = 256
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/InteractZone"]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/EquippableZone"]
+position = Vector2( -3, 0 )
 shape = SubResource( 3 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -5 )
 shape = SubResource( 4 )
 
@@ -533,6 +536,16 @@ collision_mask = 0
 [node name="HurtboxCollision" parent="Hurtbox" index="0"]
 position = Vector2( 0, -7 )
 shape = SubResource( 22 )
+
+[node name="InteractZone" type="Area2D" parent="."]
+visible = false
+position = Vector2( 4, -7 )
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone"]
+position = Vector2( -4, -1 )
+shape = SubResource( 3 )
 
 [node name="Center" type="Position2D" parent="."]
 position = Vector2( 0, -6 )
