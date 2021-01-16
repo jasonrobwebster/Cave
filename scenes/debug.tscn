@@ -83,11 +83,9 @@ position = Vector2( 17, 112 )
 
 [node name="WoodenPot" parent="." instance=ExtResource( 2 )]
 position = Vector2( 152, 91 )
-equip_type = 2
 
 [node name="SilverPot" parent="." instance=ExtResource( 15 )]
 position = Vector2( 168, 58 )
-equip_type = 2
 
 [node name="Doorway" parent="." instance=ExtResource( 17 )]
 position = Vector2( 136, 111 )
@@ -95,4 +93,3 @@ next_level = "res://scenes/Level1/Default.tscn"
 
 [node name="GoldPot" parent="." instance=ExtResource( 16 )]
 position = Vector2( 120, 43 )
-equip_type = 2
