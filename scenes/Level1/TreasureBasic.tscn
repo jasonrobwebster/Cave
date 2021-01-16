@@ -9,5 +9,5 @@
 
 [node name="ObjectSpawner" parent="." index="3"]
 treasure_spawn_mult = 3.0
-treasures_on_ground = true
 treasures = [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 3 ) ]
+next_levels = [ "res://scenes/Level1/Default.tscn", "res://scenes/Level1/Default.tscn", "res://scenes/Level1/Ravine.tscn", "res://scenes/Level1/Deep.tscn" ]
