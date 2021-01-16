@@ -8,6 +8,8 @@
 *.h text
 *.gd text
 *.cs text
+*.tscn text
+*.tres text
 
 # Declare files that will always have CRLF line endings on checkout.
 *.sln text eol=crlf

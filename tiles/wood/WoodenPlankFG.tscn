@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tiles/wood/ts_wooden_plank_FG.tres" type="TileSet" id=1]
+[ext_resource path="res://tiles/tile_shader.tres" type="Material" id=2]
+
+[node name="WoodenPlankFG" type="TileMap"]
+material = ExtResource( 2 )
+z_index = 30
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1

@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/PlayerUI.gd" type="Script" id=1]
+
+[node name="PlayerUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 50.0
+margin_bottom = 17.0
+text = "HP: 5/5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -19.0
+margin_top = 4.0
+margin_right = -3.0
+margin_bottom = 20.0
+color = Color( 0.172549, 0.25098, 0.431373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -16.0
+margin_bottom = 16.0
+rect_clip_content = true
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}

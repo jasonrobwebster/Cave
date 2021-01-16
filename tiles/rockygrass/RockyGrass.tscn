@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://tiles/rockygrass/ts_rockygrass.tres" type="TileSet" id=1]
+[ext_resource path="res://tiles/rockygrass/RockyGrass.gd" type="Script" id=2]
+[ext_resource path="res://tiles/tile_shader.tres" type="Material" id=3]
+
+[node name="RockyGrass" type="TileMap" groups=[
+"environment",
+]]
+light_mask = -2147483647
+material = ExtResource( 3 )
+z_index = 10
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+script = ExtResource( 2 )

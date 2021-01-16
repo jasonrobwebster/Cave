@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://equippable/Equippable.gd" type="Script" id=1]
+[ext_resource path="res://state_machine/state_machine.gd" type="Script" id=2]
+[ext_resource path="res://equippable/Unequiped.gd" type="Script" id=3]
+[ext_resource path="res://equippable/Equipped.gd" type="Script" id=4]
+
+[node name="EquipableBase" type="KinematicBody2D" groups=[
+"equipable",
+]]
+collision_layer = 256
+script = ExtResource( 1 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Unequipped" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+
+[node name="Equipped" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="."]

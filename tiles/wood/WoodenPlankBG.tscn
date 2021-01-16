@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tiles/wood/ts_wooden_plank_BG.tres" type="TileSet" id=1]
+
+[node name="WoodenPlankBG" type="TileMap" groups=[
+"environment",
+]]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1

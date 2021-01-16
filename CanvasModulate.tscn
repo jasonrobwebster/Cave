@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="CanvasModulate" type="CanvasModulate"]
+light_mask = -2147483647
+position = Vector2( 0, 8 )
+color = Color( 0.737255, 0.74902, 0.823529, 1 )

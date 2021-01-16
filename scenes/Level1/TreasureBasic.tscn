@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Level1/Parent.tscn" type="PackedScene" id=1]
+[ext_resource path="res://equippable/throwable/pot/SilverPot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://equippable/throwable/pot/GoldPot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://equippable/throwable/pot/WoodenPot.tscn" type="PackedScene" id=4]
+
+[node name="Level" instance=ExtResource( 1 )]
+
+[node name="ObjectSpawner" parent="." index="3"]
+treasure_spawn_mult = 3.0
+treasures = [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 3 ) ]
+next_levels = [ "res://scenes/Level1/Default.tscn", "res://scenes/Level1/Default.tscn", "res://scenes/Level1/Ravine.tscn", "res://scenes/Level1/Deep.tscn" ]
