@@ -6,6 +6,3 @@
 
 [node name="RandomRoomWalker" parent="." index="0"]
 bbox = Vector2( 2, 10 )
-
-[node name="ObjectSpawner" parent="." index="3"]
-next_levels = [ null ]
