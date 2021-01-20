@@ -12,12 +12,12 @@
 [ext_resource path="res://player/Fall.gd" type="Script" id=10]
 [ext_resource path="res://player/Land.gd" type="Script" id=11]
 [ext_resource path="res://lights/light_strong2.png" type="Texture" id=12]
-[ext_resource path="res://player/CarryIdle.gd" type="Script" id=13]
-[ext_resource path="res://player/CarryWalk.gd" type="Script" id=14]
-[ext_resource path="res://player/CarryThrow.gd" type="Script" id=15]
+[ext_resource path="res://player/Hurt.gd" type="Script" id=13]
+[ext_resource path="res://player/entity.shader" type="Shader" id=14]
 
-[sub_resource type="CanvasItemMaterial" id=1]
-light_mode = 1
+[sub_resource type="ShaderMaterial" id=24]
+shader = ExtResource( 14 )
+shader_param/blinking = false
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1, 1 )
@@ -58,20 +58,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 55, 56 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("StateMachine/CarryThrow")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.15 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_go_to_Idle_state"
-} ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -215,6 +201,22 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 36 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "Hurt"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 60 ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -434,14 +436,11 @@ script = ExtResource( 10 )
 [node name="Land" type="Node" parent="StateMachine"]
 script = ExtResource( 11 )
 
-[node name="CarryIdle" type="Node" parent="StateMachine"]
+[node name="Hurt" type="Node" parent="StateMachine"]
 script = ExtResource( 13 )
 
-[node name="CarryWalk" type="Node" parent="StateMachine"]
-script = ExtResource( 14 )
-
-[node name="CarryThrow" type="Node" parent="StateMachine"]
-script = ExtResource( 15 )
+[node name="Timer" type="Timer" parent="StateMachine/Hurt"]
+one_shot = true
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -7 )
@@ -455,12 +454,12 @@ shadow_filter_smooth = 40.0
 [node name="Pivot" type="Position2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Pivot"]
-material = SubResource( 1 )
+material = SubResource( 24 )
 position = Vector2( 1, -8 )
 texture = ExtResource( 1 )
-vframes = 10
+vframes = 11
 hframes = 6
-frame = 56
+frame = 60
 
 [node name="CarryPivot" type="Position2D" parent="Pivot"]
 position = Vector2( 0, -6 )
@@ -509,6 +508,7 @@ anims/FallForwardUp = SubResource( 12 )
 anims/FallMid = SubResource( 13 )
 anims/FallUp = SubResource( 14 )
 anims/Grapple = SubResource( 15 )
+anims/Hurt = SubResource( 23 )
 anims/Idle = SubResource( 16 )
 anims/JumpForward = SubResource( 17 )
 anims/JumpUp = SubResource( 18 )
@@ -552,11 +552,14 @@ position = Vector2( 0, -6 )
 
 [node name="Head" type="Position2D" parent="."]
 position = Vector2( 1, -11 )
+[connection signal="timeout" from="StateMachine/Hurt/Timer" to="StateMachine/Hurt" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Pivot/HoldTop" to="StateMachine/Fall" method="_on_HoldTop_body_entered"]
 [connection signal="body_exited" from="Pivot/HoldTop" to="StateMachine/Fall" method="_on_HoldTop_body_exited"]
 [connection signal="body_entered" from="Pivot/HoldBottom" to="StateMachine/Fall" method="_on_HoldBottom_body_entered"]
 [connection signal="body_exited" from="Pivot/HoldBottom" to="StateMachine/Fall" method="_on_HoldBottom_body_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 
 [editable path="Hitbox"]
 

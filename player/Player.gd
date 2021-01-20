@@ -1,11 +1,21 @@
 extends KinematicBody2D
 
 
-onready var center: Position2D = $Center
-onready var head: Position2D = $Head
+onready var state_machine := $StateMachine
+onready var sprite := $Pivot/Sprite
+onready var center := $Center
+onready var head := $Head
 
 
 func _on_Hurtbox_area_entered(area: Hitbox):
 	if area.get("damage"):
 		PlayerStats.health -= area.damage
 
+
+func _on_Hurtbox_invincibility_started():
+	state_machine.change_state("Hurt", state_machine.current_state.velocity)
+	sprite.material.set_shader_param("blinking", true)
+
+
+func _on_Hurtbox_invincibility_ended():
+	sprite.material.set_shader_param("blinking", false)

@@ -8,7 +8,6 @@ const COYOTE_TIME := 0.1
 const RUN_MULT := 0.5
 
 var _snap: bool
-var velocity: Vector2
 
 
 func update(delta):
@@ -43,7 +42,7 @@ func _calculate_velocity(delta, acceleration, friction):
 	var fdelta: float = delta * global.TARGET_FPS
 	var input_x := _get_input_x()
 	var input_run := _get_input_run(RUN_MULT)
-	if input_x != 0:
+	if input_x != 0 and acceleration != 0:
 		velocity.x = move_toward(
 			velocity.x, 
 			input_x * MAX_MOVE_SPEED * input_run, 
