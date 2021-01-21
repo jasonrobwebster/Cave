@@ -2,7 +2,6 @@ extends Node2D
 class_name RandomRoomWalker
 
 signal level_finished
-signal level_finalised(path_rooms, treasure_rooms, player_room, room_size, tile_size)
 signal player_placed(player_path)
 
 export(float, 0, 1) var enemy_spawn_multiplier = 1
@@ -41,6 +40,7 @@ onready var _room_space := ActionSpace.new(
 	[1, 1, 3, 1, 1, 1, 1, 1, 1, 0.5],  #{L, R, LR, LB, RB, LT, RT, LRT, LRB, LRBT}
 	_room_mask
 )
+onready var object_spawner := $ObjectSpawner
 
 
 func _ready():
@@ -78,15 +78,8 @@ func _generate_level():
 	_place_walls()
 	_place_background()
 	_fill_empty()
+	_handle_objectspawn()
 	emit_signal("level_finished")
-	emit_signal(
-		"level_finalised",
-		path.duplicate(),
-		treasure.duplicate(),
-		player_room,
-		_rooms.room_size,
-		_rooms.tile_size
-	)
 
 
 func _reset():
@@ -170,6 +163,8 @@ func _place_walls():
 			var right_v := Vector2(x_right - x - 1, y)
 			_walls.set_cellv(left_v, _rooms.wall_id)
 			_walls.set_cellv(right_v, _rooms.wall_id)
+	
+	_walls.update_dirty_quadrants()
 
 
 func _place_background():
@@ -185,6 +180,22 @@ func _fill_empty():
 	for roomv in _empty_rooms:
 		_place_room(roomv)
 		treasure.push_back(roomv)
+
+
+func _handle_objectspawn():
+	object_spawner.set_room_info(
+		path.duplicate(),
+		treasure.duplicate(),
+		player_room,
+		_rooms.room_size,
+		_rooms.tile_size
+	)
+	# For some reason, particularly at this time, the Physics2DServer
+	# hasn't caught on to the fact that tilemaps have been
+	# placed with collision areas. Since the object spawner uses this internally
+	# we opt to wait a frame (which, somehow, fixes this issue).
+	yield(get_tree().create_timer(0), "timeout")
+	object_spawner.place_enemies()
 
 
 func _place_room(gridv: Vector2, incoming := [], outgoing := []):
