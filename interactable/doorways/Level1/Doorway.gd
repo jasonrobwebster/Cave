@@ -14,4 +14,5 @@ func interact(_player):
 	if global.next_level() == 0:
 		get_tree().change_scene_to(load(next_room))
 	else:
+		global.level += 1
 		get_tree().change_scene_to(load(next_level))

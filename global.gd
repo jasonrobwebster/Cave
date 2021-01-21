@@ -22,5 +22,4 @@ func set_room(value):
 func next_level() -> int:
 	# checks what the next level will be and returns it
 	var _lvl = level
-	print(_lvl)
 	return (_lvl + 1) % LEVEL_PER_ROOM
