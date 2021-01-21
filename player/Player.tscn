@@ -15,7 +15,7 @@
 [ext_resource path="res://player/Hurt.gd" type="Script" id=13]
 [ext_resource path="res://player/entity.shader" type="Shader" id=14]
 
-[sub_resource type="ShaderMaterial" id=24]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 14 )
 shader_param/blinking = false
 
@@ -203,7 +203,7 @@ tracks/0/keys = {
 "values": [ 36 ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=16]
 resource_name = "Hurt"
 length = 0.1
 tracks/0/type = "value"
@@ -219,7 +219,7 @@ tracks/0/keys = {
 "values": [ 60 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 0.7
 loop = true
 tracks/0/type = "value"
@@ -235,7 +235,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=18]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Sprite:frame")
@@ -276,7 +276,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=19]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Sprite:frame")
@@ -317,7 +317,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=20]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -371,7 +371,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=21]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -387,7 +387,7 @@ tracks/0/keys = {
 "values": [ 12, 13, 14, 15, 16, 17 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=22]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -403,11 +403,12 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 9, 10, 11 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=22]
+[sub_resource type="CapsuleShape2D" id=23]
 radius = 2.0
 height = 10.0
 
 [node name="Player" type="KinematicBody2D" groups=[
+"camera_shaker",
 "player",
 ]]
 z_index = 10
@@ -454,7 +455,7 @@ shadow_filter_smooth = 40.0
 [node name="Pivot" type="Position2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Pivot"]
-material = SubResource( 24 )
+material = SubResource( 1 )
 position = Vector2( 1, -8 )
 texture = ExtResource( 1 )
 vframes = 11
@@ -508,13 +509,13 @@ anims/FallForwardUp = SubResource( 12 )
 anims/FallMid = SubResource( 13 )
 anims/FallUp = SubResource( 14 )
 anims/Grapple = SubResource( 15 )
-anims/Hurt = SubResource( 23 )
-anims/Idle = SubResource( 16 )
-anims/JumpForward = SubResource( 17 )
-anims/JumpUp = SubResource( 18 )
-anims/Land = SubResource( 19 )
-anims/Run = SubResource( 20 )
-anims/Walk = SubResource( 21 )
+anims/Hurt = SubResource( 16 )
+anims/Idle = SubResource( 17 )
+anims/JumpForward = SubResource( 18 )
+anims/JumpUp = SubResource( 19 )
+anims/Land = SubResource( 20 )
+anims/Run = SubResource( 21 )
+anims/Walk = SubResource( 22 )
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -535,7 +536,7 @@ collision_mask = 0
 
 [node name="HurtboxCollision" parent="Hurtbox" index="0"]
 position = Vector2( 0, -7 )
-shape = SubResource( 22 )
+shape = SubResource( 23 )
 
 [node name="InteractZone" type="Area2D" parent="."]
 visible = false
@@ -557,6 +558,7 @@ position = Vector2( 1, -11 )
 [connection signal="body_exited" from="Pivot/HoldTop" to="StateMachine/Fall" method="_on_HoldTop_body_exited"]
 [connection signal="body_entered" from="Pivot/HoldBottom" to="StateMachine/Fall" method="_on_HoldBottom_body_entered"]
 [connection signal="body_exited" from="Pivot/HoldBottom" to="StateMachine/Fall" method="_on_HoldBottom_body_exited"]
+[connection signal="Hurt" from="Hurtbox" to="." method="_on_Hurtbox_Hurt"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
