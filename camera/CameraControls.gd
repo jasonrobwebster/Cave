@@ -6,14 +6,15 @@ const LOOK_DISTANCE = 60
 
 var _player: KinematicBody2D
 
-onready var camera = $Camera
-onready var tween = $Tween
-onready var timer = $Timer
+onready var camera := $Camera
+onready var tween := $Tween
+onready var timer := $Timer
 
 
 func _ready():
 	_player = get_node(player_path)
 	follow_player()
+	camera.connect_to_shakers()
 
 
 func _input(event):
@@ -30,6 +31,9 @@ func _input(event):
 		timer.stop()
 		_reset_cam()
 
+
+func setup_camera():
+	follow_player()
 
 
 func set_player(player: NodePath):

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://camera/CameraControls.gd" type="Script" id=1]
+[ext_resource path="res://camera/Camera.gd" type="Script" id=2]
 
 [node name="CameraPivot" type="Position2D"]
 script = ExtResource( 1 )
@@ -14,6 +15,13 @@ drag_margin_v_enabled = true
 drag_margin_top = 0.02
 drag_margin_bottom = 0.02
 editor_draw_drag_margin = true
+script = ExtResource( 2 )
+shake_amplitude = 4.0
+shake_duration = 0.5
+shake_easing = 1.7411
+
+[node name="Timer" type="Timer" parent="Camera"]
+one_shot = true
 
 [node name="Timer" type="Timer" parent="."]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
