@@ -33,7 +33,21 @@ func _ready():
 	_rng.randomize()
 
 
-func _place_enemies():
+func set_room_info(
+	path_rooms, 
+	treasure_rooms,
+	player_room, 
+	room_size,
+	tile_size
+):
+	_path = path_rooms
+	_treasure = treasure_rooms
+	_player_room = player_room
+	_room_size = room_size
+	_tile_size = tile_size
+
+
+func place_enemies():
 	var empty_points := _find_empty_worldvs()
 	var ground_points := _find_empty_ground_worldvs(empty_points)
 	var rooftop_points := _find_empty_rooftop_worldvs(empty_points)
@@ -280,23 +294,4 @@ func _roomv_to_tilev(roomv: Vector2) -> Vector2:
 
 func _roomv_to_worldv(roomv: Vector2) -> Vector2:
 	return roomv * _room_size * _tile_size
-
-
-func _on_RandomRoomWalker_level_finalised(
-	path_rooms, 
-	treasure_rooms,
-	player_room, 
-	room_size,
-	tile_size
-):
-	_path = path_rooms
-	_treasure = treasure_rooms
-	_player_room = player_room
-	_room_size = room_size
-	_tile_size = tile_size
-	
-	# Have to pause a short bit to allow the tilemap collision areas to 
-	# update. This somehow (?) solves that problem.
-	yield(get_tree().create_timer(0), "timeout")
-	_place_enemies()
 	
