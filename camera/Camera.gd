@@ -1,6 +1,6 @@
 extends Camera2D
 
-export(float, 0, 10, 0.1) var shake_amplitude = 6.0
+export(float, 0, 10, 0.1) var shake_amplitude = 3.0
 export(float, 0, 10, 0.1) var shake_duration = 0.7 setget set_duration
 export(float, EASE) var shake_easing = 1.0
 export(bool) var shake = false setget set_shake
