@@ -26,7 +26,7 @@ var _player_room: Vector2
 var _room_size: Vector2
 var _tile_size: Vector2
 var _rng = RandomNumberGenerator.new()
-var _doorway: PackedScene = preload("res://interactable/doorways/Level1/Doorway.tscn")
+var _doorway: PackedScene = preload("res://interactable/doorways/Doorway.tscn")
 
 
 func _ready():
