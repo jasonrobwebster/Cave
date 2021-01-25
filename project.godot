@@ -96,6 +96,7 @@ global="*res://global.gd"
 PlayerStats="*res://player_stats.gd"
 GlobalCanvasModulate="*res://CanvasModulate.tscn"
 GlobalWorldEnvironment="*res://WorldEnvironment.tscn"
+SceneManager="*res://globals/SceneManager.tscn"
 
 [display]
 

@@ -16,6 +16,7 @@
 [ext_resource path="res://player/entity.shader" type="Shader" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
 shader = ExtResource( 14 )
 shader_param/blinking = false
 
@@ -460,7 +461,7 @@ position = Vector2( 1, -8 )
 texture = ExtResource( 1 )
 vframes = 11
 hframes = 6
-frame = 60
+frame = 42
 
 [node name="CarryPivot" type="Position2D" parent="Pivot"]
 position = Vector2( 0, -6 )
