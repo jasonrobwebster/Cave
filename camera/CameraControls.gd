@@ -14,7 +14,6 @@ onready var timer := $Timer
 func _ready():
 	_player = get_node(player_path)
 	follow_player()
-	camera.connect_to_shakers()
 
 
 func _input(event):

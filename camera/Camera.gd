@@ -14,6 +14,8 @@ func _ready():
 	_rng.randomize()
 	set_process(false)
 	self.shake_duration = shake_duration
+	connect_to_shakers()
+	SceneManager.camera_path = get_path()
 
 
 func _process(delta):
