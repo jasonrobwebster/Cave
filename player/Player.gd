@@ -9,8 +9,15 @@ onready var center := $Center
 onready var head := $Head
 
 
+func _ready():
+	SceneManager.player_path = get_path()
+
+
 func handle_change_scene():
-	pass
+	state_machine.active = false
+	anim_player.stop()
+	anim_player.play("WalkIn")
+	yield(anim_player, "animation_finished")
 
 
 func _on_Hurtbox_area_entered(area: Hitbox):
@@ -19,8 +26,9 @@ func _on_Hurtbox_area_entered(area: Hitbox):
 
 
 func _on_Hurtbox_invincibility_started():
-	state_machine.change_state("Hurt", state_machine.current_state.velocity)
-	sprite.material.set_shader_param("blinking", true)
+	if state_machine.active:
+		state_machine.change_state("Hurt", state_machine.current_state.velocity)
+		sprite.material.set_shader_param("blinking", true)
 
 
 func _on_Hurtbox_invincibility_ended():

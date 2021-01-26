@@ -53,5 +53,5 @@ func _handle_interaction():
 	
 	if not min_area:
 		return
-	min_area.interact(owner)
+	min_area.interact()
 #	emit_signal("state_change", "CarryIdle", min_body)

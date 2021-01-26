@@ -33,6 +33,7 @@ var _objects: Node2D = null
 var _tilemaps: Dictionary = {}
 var _bg: TileMap = null
 var _walls: TileMap = null
+var _doorway = preload("res://interactable/doorways/Doorway.tscn")
 
 onready var _rooms: ModularRooms = ModularScene.instance()
 onready var _room_space := ActionSpace.new(
@@ -66,6 +67,8 @@ func _ready():
 	
 	if _rooms.get_class() != "ModularRooms":
 		push_warning("variable 'Rooms' should be a 'ModularRooms' class")
+	
+	connect("level_finished", SceneManager, "_on_level_finished")
 	
 	_generate_level()
 
@@ -218,6 +221,9 @@ func _place_room(gridv: Vector2, incoming := [], outgoing := []):
 			_player = obj.duplicate()
 			_player.global_position += obj_offset
 			_objects.add_child(_player)
+			var door = _doorway.instance()
+			door.global_position = _player.global_position
+			_objects.add_child(door)
 			emit_signal("player_placed", _player.get_path())
 			continue
 		if obj.is_in_group("enemy"):

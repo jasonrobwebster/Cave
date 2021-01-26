@@ -27,7 +27,7 @@ func _physics_process(delta):
 func tween_open_radius():
 	self.drawing_circle = true
 	tween.stop_all()
-	tween.interpolate_property(self, "circle_radius", 0, TWEEN_RADIUS_SIZE, TWEEN_DURATION, Tween.TRANS_LINEAR)
+	tween.interpolate_property(self, "circle_radius", 0, TWEEN_RADIUS_SIZE, TWEEN_DURATION * 2, Tween.TRANS_LINEAR)
 	tween.start()
 
 
@@ -59,12 +59,23 @@ func change_scene(target_scene: PackedScene):
 	get_tree().change_scene_to(target_scene)
 
 
-func _on_Doorway_door_used(target_scene: String, door: Node2D, player: Node2D):
+func _on_Doorway_door_used(target_scene: String, door: Node2D):
 	# this is a messy implementation, but it works for now
-	player.global_position = door.global_position
-	player.handle_change_scene()
+	var player = get_node_or_null(player_path)
+	if player:
+		player.global_position = door.global_position
+		player.handle_change_scene()
 	self.circle_origin = door.global_position
 	tween_close_radius()
 	yield(tween, "tween_all_completed")
 	get_tree().change_scene(target_scene)
+
+
+func _on_level_finished():
+	var player = get_node_or_null(player_path)
+	if player:
+		self.circle_origin = player.global_position
+	tween_open_radius()
+	yield(tween, "tween_all_completed")
 	self.drawing_circle = false
+	
