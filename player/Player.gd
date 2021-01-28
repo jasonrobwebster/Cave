@@ -36,5 +36,5 @@ func _on_Hurtbox_invincibility_ended():
 
 
 func _on_Hurtbox_Hurt(area: Hitbox):
-	if area.get("damage"):
+	if area.get("damage") and state_machine.active:
 		PlayerStats.health -= area.damage
