@@ -44,7 +44,6 @@ func set_circle_origin(origin: Vector2):
 
 
 func set_circle_radius(radius: float):
-	print(radius)
 	circle_radius = radius
 	post_processing.material.set_shader_param("circle_radius", radius)
 
