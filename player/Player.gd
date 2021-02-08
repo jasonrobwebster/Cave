@@ -7,10 +7,12 @@ onready var anim_player := $AnimationPlayer
 onready var sprite := $Pivot/Sprite
 onready var center := $Center
 onready var head := $Head
+onready var carry_pivot: Position2D = $Pivot/CarryPivot
 
 
 func _ready():
 	SceneManager.player_path = get_path()
+	PlayerStats.player_path = get_path()
 
 
 func handle_change_scene():

@@ -20,7 +20,9 @@ func _handle_pickup():
 	var min_dist := 100000.0
 	var min_body: Node
 	for body in bodies:
-		if body == carry_pivot.get_child(0):
+		if body == PlayerStats.get_child(0):
+			continue
+		if not body.can_equip:
 			continue
 		var dist: float = owner.global_position.distance_to(body.global_position)
 		if dist >= min_dist:
@@ -28,11 +30,11 @@ func _handle_pickup():
 		min_dist = dist
 		min_body = body
 	
-	if carry_pivot.get_child_count() > 0:
-		carry_pivot.get_child(0).unequip()
+	if PlayerStats.get_child_count() > 0:
+		PlayerStats.get_child(0).unequip()
 	if not min_body:
 		return
-	min_body.equip(carry_pivot)
+	min_body.equip()
 #	emit_signal("state_change", "CarryIdle", min_body)
 
 
