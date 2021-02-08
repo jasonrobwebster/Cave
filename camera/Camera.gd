@@ -33,7 +33,7 @@ func set_duration(value):
 
 
 func set_shake(value):
-	shake = value
+	shake = value and Options.screen_shake
 	set_process(value)
 	offset = Vector2.ZERO
 	if shake:
