@@ -1,7 +1,7 @@
 extends Node2D
 
 const TWEEN_RADIUS_SIZE := 300
-const TWEEN_DURATION := 0.5
+const TWEEN_DURATION := 1
 
 export (NodePath) var camera_path
 export (NodePath) var player_path
@@ -27,7 +27,7 @@ func _physics_process(delta):
 func tween_open_radius():
 	self.drawing_circle = true
 	tween.stop_all()
-	tween.interpolate_property(self, "circle_radius", 0, TWEEN_RADIUS_SIZE, TWEEN_DURATION * 2, Tween.TRANS_LINEAR)
+	tween.interpolate_property(self, "circle_radius", 0, TWEEN_RADIUS_SIZE, TWEEN_DURATION, Tween.TRANS_LINEAR)
 	tween.start()
 
 
@@ -44,6 +44,7 @@ func set_circle_origin(origin: Vector2):
 
 
 func set_circle_radius(radius: float):
+	print(radius)
 	circle_radius = radius
 	post_processing.material.set_shader_param("circle_radius", radius)
 
@@ -72,6 +73,7 @@ func _on_Doorway_door_used(target_scene: String, door: Node2D):
 
 
 func _on_level_finished():
+	print("level")
 	var player = get_node_or_null(player_path)
 	if player:
 		self.circle_origin = player.global_position

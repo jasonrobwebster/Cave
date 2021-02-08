@@ -1,8 +1,9 @@
 extends Node2D
 class_name RandomRoomWalker
 
-signal level_finished
+signal level_finished()
 signal player_placed(player_path)
+signal objects_placed()
 
 export(float, 0, 1) var enemy_spawn_multiplier = 1
 export(NodePath) var background_path
@@ -82,6 +83,7 @@ func _generate_level():
 	_place_background()
 	_fill_empty()
 	_handle_objectspawn()
+	yield(get_tree().create_timer(0.5), "timeout")
 	emit_signal("level_finished")
 
 
