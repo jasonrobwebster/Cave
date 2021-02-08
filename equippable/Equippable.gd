@@ -11,12 +11,12 @@ export(bool) var can_equip = true
 onready var state_machine: StateMachine = $StateMachine
 
 
-func equip(new_parent: Node2D):
+func equip():
 	if state_machine.current_state.name == 'Equipped':
 		return
 	if not can_equip:
 		return
-	state_machine.change_state("Equipped", new_parent)
+	state_machine.change_state("Equipped")
 
 
 func unequip():
