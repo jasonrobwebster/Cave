@@ -19,7 +19,6 @@ func handle_change_scene():
 	state_machine.active = false
 	anim_player.stop()
 	anim_player.play("WalkIn")
-	yield(anim_player, "animation_finished")
 
 
 func _on_Hurtbox_area_entered(area: Hitbox):

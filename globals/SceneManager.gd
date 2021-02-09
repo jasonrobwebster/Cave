@@ -66,6 +66,7 @@ func _on_Doorway_door_used(target_scene: String, door: Node2D):
 	if player:
 		player.global_position = door.global_position
 		player.handle_change_scene()
+		yield(player.anim_player, "animation_finished")
 	self.circle_origin = door.global_position
 #	tween_close_radius()
 #	yield(tween, "tween_all_completed")

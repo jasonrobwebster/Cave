@@ -49,11 +49,11 @@ func set_room_info(
 
 func place_enemies():
 	var empty_points := _find_empty_worldvs()
-	var line = Line2D.new()
-	line.z_index = 100
-	line.width = 1
-	line.points = empty_points
-	add_child(line)
+#	var line = Line2D.new()
+#	line.z_index = 100
+#	line.width = 1
+#	line.points = empty_points
+#	add_child(line)
 	var ground_points := _find_empty_ground_worldvs(empty_points)
 	var rooftop_points := _find_empty_rooftop_worldvs(empty_points)
 	var wall_points := _find_empty_wall_worldvs(empty_points)
