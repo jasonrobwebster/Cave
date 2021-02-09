@@ -4,6 +4,7 @@ class_name RandomRoomWalker
 signal level_finished()
 signal player_placed(player_path)
 signal objects_placed()
+signal tiles_placed()
 
 export(float, 0, 1) var enemy_spawn_multiplier = 1
 export(NodePath) var background_path
@@ -64,7 +65,7 @@ func _ready():
 		add_child(_objects)
 	
 	for tm in _tilemaps.values():
-		connect("level_finished", tm, "_ready")
+		connect("tiles_placed", tm, "_ready")
 	
 	if _rooms.get_class() != "ModularRooms":
 		push_warning("variable 'Rooms' should be a 'ModularRooms' class")
@@ -82,7 +83,9 @@ func _generate_level():
 	_place_walls()
 	_place_background()
 	_fill_empty()
+	emit_signal("tiles_placed")
 	_handle_objectspawn()
+	yield(self, "objects_placed")
 	yield(get_tree().create_timer(0.5), "timeout")
 	emit_signal("level_finished")
 
@@ -199,8 +202,9 @@ func _handle_objectspawn():
 	# hasn't caught on to the fact that tilemaps have been
 	# placed with collision areas. Since the object spawner uses this internally
 	# we opt to wait a frame (which, somehow, fixes this issue).
-	yield(get_tree().create_timer(0), "timeout")
+	yield(get_tree().create_timer(1/global.TARGET_FPS), "timeout")
 	object_spawner.place_enemies()
+	emit_signal("objects_placed")
 
 
 func _place_room(gridv: Vector2, incoming := [], outgoing := []):

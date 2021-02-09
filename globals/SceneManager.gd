@@ -61,14 +61,15 @@ func change_scene(target_scene: PackedScene):
 
 func _on_Doorway_door_used(target_scene: String, door: Node2D):
 	# this is a messy implementation, but it works for now
+	var scene = load(target_scene)
 	var player = get_node_or_null(player_path)
 	if player:
 		player.global_position = door.global_position
 		player.handle_change_scene()
 	self.circle_origin = door.global_position
-	tween_close_radius()
-	yield(tween, "tween_all_completed")
-	get_tree().change_scene(target_scene)
+#	tween_close_radius()
+#	yield(tween, "tween_all_completed")
+	get_tree().change_scene_to(scene)
 
 
 func _on_level_finished():
@@ -76,7 +77,8 @@ func _on_level_finished():
 	var player = get_node_or_null(player_path)
 	if player:
 		self.circle_origin = player.global_position
-	tween_open_radius()
-	yield(tween, "tween_all_completed")
+#	tween_open_radius()
+	self.drawing_circle = false
+#	yield(tween, "tween_all_completed")
 	self.drawing_circle = false
 	
