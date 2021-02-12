@@ -16,14 +16,14 @@ func _ready():
 
 
 func handle_change_scene():
+	# called by the SceneManager when the scene changes
 	state_machine.active = false
 	anim_player.stop()
 	anim_player.play("WalkIn")
-	yield(anim_player, "animation_finished")
 
 
 func _on_Hurtbox_area_entered(area: Hitbox):
-	if area.get("damage"):
+	if area.get("damage") and state_machine.active:
 		emit_signal("camera_shake_requested")
 
 
