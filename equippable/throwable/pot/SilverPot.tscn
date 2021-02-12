@@ -8,10 +8,7 @@ atlas = ExtResource( 2 )
 region = Rect2( 0, 16, 16, 16 )
 margin = Rect2( 4, -2, 0, 0 )
 
-[node name="SilverPot" groups=[
-"equipable",
-] instance=ExtResource( 1 )]
-collision_layer = 256
+[node name="SilverPot" instance=ExtResource( 1 )]
 spawn_chance = 0.5
 value = 200
 
