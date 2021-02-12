@@ -54,29 +54,19 @@ position = Vector2( 144, 80 )
 [node name="Torch2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 120, 80 )
 
-[node name="Bat" parent="." instance=ExtResource( 10 )]
-position = Vector2( 24, 40 )
-
-[node name="Bat3" parent="." instance=ExtResource( 10 )]
-position = Vector2( 40, 72 )
-
-[node name="Bat2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 104, 24 )
-
 [node name="Bat4" parent="." instance=ExtResource( 10 )]
 position = Vector2( 104, 168 )
-
-[node name="Snake" parent="." instance=ExtResource( 13 )]
-position = Vector2( 115, 111 )
 
 [node name="Snake2" parent="." instance=ExtResource( 13 )]
 position = Vector2( 17, 112 )
 
 [node name="WoodenPot" parent="." instance=ExtResource( 2 )]
 position = Vector2( 152, 91 )
+equip_type = 2
 
 [node name="SilverPot" parent="." instance=ExtResource( 15 )]
 position = Vector2( 168, 58 )
+equip_type = 2
 
 [node name="Doorway" parent="." instance=ExtResource( 17 )]
 position = Vector2( 136, 111 )
@@ -84,5 +74,6 @@ next_level = "res://scenes/Level1/Default.tscn"
 
 [node name="GoldPot" parent="." instance=ExtResource( 16 )]
 position = Vector2( 120, 43 )
+equip_type = 2
 
 [editable path="CameraPivot"]
