@@ -4,6 +4,7 @@ class_name RandomRoomWalker
 signal level_finished()
 signal player_placed(player_path)
 signal objects_placed()
+signal tiles_placed()
 
 export(float, 0, 1) var enemy_spawn_multiplier = 1
 export(NodePath) var background_path
@@ -30,7 +31,6 @@ var _player_reached := false
 var _end_reached := false
 var _rng := RandomNumberGenerator.new()
 var _player: Node2D = null
-var _objects: Node2D = null
 var _tilemaps: Dictionary = {}
 var _bg: TileMap = null
 var _walls: TileMap = null
@@ -57,14 +57,8 @@ func _ready():
 	_tilemaps[_bg.name] = _bg
 	_tilemaps[_walls.name] = _walls
 	
-	if not _objects:
-		_objects = Node2D.new()
-		_objects.global_position = global_position
-		_objects.name = "Objects"
-		add_child(_objects)
-	
 	for tm in _tilemaps.values():
-		connect("level_finished", tm, "_ready")
+		connect("tiles_placed", tm, "_ready")
 	
 	if _rooms.get_class() != "ModularRooms":
 		push_warning("variable 'Rooms' should be a 'ModularRooms' class")
@@ -82,6 +76,7 @@ func _generate_level():
 	_place_walls()
 	_place_background()
 	_fill_empty()
+	emit_signal("tiles_placed")
 	_handle_objectspawn()
 	yield(get_tree().create_timer(0.5), "timeout")
 	emit_signal("level_finished")
@@ -199,8 +194,9 @@ func _handle_objectspawn():
 	# hasn't caught on to the fact that tilemaps have been
 	# placed with collision areas. Since the object spawner uses this internally
 	# we opt to wait a frame (which, somehow, fixes this issue).
-	yield(get_tree().create_timer(0), "timeout")
+	yield(get_tree().create_timer(1/global.TARGET_FPS), "timeout")
 	object_spawner.place_enemies()
+	emit_signal("objects_placed")
 
 
 func _place_room(gridv: Vector2, incoming := [], outgoing := []):
@@ -221,11 +217,11 @@ func _place_room(gridv: Vector2, incoming := [], outgoing := []):
 			if !in_player_room:
 				continue
 			_player = obj.duplicate()
+			object_spawner.add_child(_player)
 			_player.global_position += obj_offset
-			_objects.add_child(_player)
 			var door = _doorway.instance()
+			object_spawner.add_child(door)
 			door.global_position = _player.global_position
-			_objects.add_child(door)
 			emit_signal("player_placed", _player.get_path())
 			continue
 		if obj.is_in_group("enemy"):
@@ -238,8 +234,8 @@ func _place_room(gridv: Vector2, incoming := [], outgoing := []):
 				continue
 			
 		var child: Node2D = obj.duplicate()
+		object_spawner.add_child(child)
 		child.global_position += obj_offset
-		_objects.add_child(child)
 
 
 func _handle_tilemap(tm: TileMap):
