@@ -404,7 +404,7 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 9, 10, 11 ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=23]
 resource_name = "WalkIn"
 length = 0.5
 tracks/0/type = "value"
@@ -432,7 +432,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.839216 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=23]
+[sub_resource type="CapsuleShape2D" id=24]
 radius = 2.0
 height = 10.0
 
@@ -489,6 +489,7 @@ position = Vector2( 1, -8 )
 texture = ExtResource( 1 )
 vframes = 11
 hframes = 6
+frame = 60
 
 [node name="CarryPivot" type="Position2D" parent="Pivot"]
 position = Vector2( 0, -6 )
@@ -544,7 +545,7 @@ anims/JumpUp = SubResource( 19 )
 anims/Land = SubResource( 20 )
 anims/Run = SubResource( 21 )
 anims/Walk = SubResource( 22 )
-anims/WalkIn = SubResource( 24 )
+anims/WalkIn = SubResource( 23 )
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -565,7 +566,7 @@ collision_mask = 0
 
 [node name="HurtboxCollision" parent="Hurtbox" index="0"]
 position = Vector2( 0, -7 )
-shape = SubResource( 23 )
+shape = SubResource( 24 )
 
 [node name="InteractZone" type="Area2D" parent="."]
 visible = false
