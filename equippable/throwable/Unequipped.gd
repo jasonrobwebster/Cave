@@ -2,18 +2,20 @@ extends "res://equippable/Unequiped.gd"
 
 signal thrown_collision()
 
-export(float) var THROW_SPEED = 300
+export(float) var THROW_SPEED = 1000
 
 var _thrown: bool = false
 var _direction: Vector2
 
-func enter(_previous_state: String = '', pos = null):
-	if pos == null:
+func enter(_previous_state: String = '', thrown_to = null):
+	if thrown_to == null:
 		_thrown = false
 		return
 	_thrown = true
 	owner.can_equip = false
-	_direction = owner.global_position.direction_to(pos)
+	print(owner.global_position, thrown_to)
+	_direction = owner.global_position.direction_to(thrown_to)
+	print(_direction)
 	velocity = Vector2.ZERO
 
 

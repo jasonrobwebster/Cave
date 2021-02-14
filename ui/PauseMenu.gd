@@ -2,19 +2,55 @@ extends Control
 
 export(NodePath) var focus_button
 
+var paused: bool setget set_paused
+
+onready var paused_panel := $PausedPanel
+onready var options_panel := $OptionsPanel
+
 
 func _ready():
 	visible = false
 
 
+func set_paused(value: bool):
+	paused = value
+	get_tree().paused = paused
+	visible = paused
+	if paused:
+		paused_panel.visible = true
+		options_panel.visible = false
+	if paused and focus_button:
+		get_node(focus_button).grab_focus()
+
+
 func _input(event):
 	if event.is_action_pressed("pause"):
-		var pause_state: bool = not get_tree().paused
-		get_tree().paused = pause_state
-		visible = pause_state
-		if pause_state and focus_button:
-			get_node(focus_button).grab_focus()
+		_toggle_pause()
+
+
+func _toggle_pause():
+	var pause_state: bool = not get_tree().paused
+	self.paused = pause_state
 
 
 func _on_Quit_pressed():
-	get_tree().quit()
+	var current_scene := get_tree().current_scene
+	if current_scene.name == "MainMenu":
+		get_tree().quit()
+	else:
+		self.paused = false
+		SceneManager.transition_to_main_menu()
+
+
+func _on_Options_pressed():
+	paused_panel.visible = false
+	options_panel.visible = true
+
+
+func _on_options_back_button_pressed():
+	options_panel.visible = false
+	paused_panel.visible = true
+
+
+func _on_Resume_pressed():
+	_toggle_pause()

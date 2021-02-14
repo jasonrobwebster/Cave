@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://player/platformer.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
@@ -12,12 +12,13 @@
 [ext_resource path="res://player/Fall.gd" type="Script" id=10]
 [ext_resource path="res://player/Land.gd" type="Script" id=11]
 [ext_resource path="res://lights/light_strong2.png" type="Texture" id=12]
-[ext_resource path="res://player/CarryIdle.gd" type="Script" id=13]
-[ext_resource path="res://player/CarryWalk.gd" type="Script" id=14]
-[ext_resource path="res://player/CarryThrow.gd" type="Script" id=15]
+[ext_resource path="res://player/Hurt.gd" type="Script" id=13]
+[ext_resource path="res://player/entity.shader" type="Shader" id=14]
 
-[sub_resource type="CanvasItemMaterial" id=1]
-light_mode = 1
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/blinking = false
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1, 1 )
@@ -58,20 +59,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 55, 56 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("StateMachine/CarryThrow")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.15 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_go_to_Idle_state"
-} ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -218,6 +205,22 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=16]
+resource_name = "Hurt"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 60 ]
+}
+
+[sub_resource type="Animation" id=17]
 length = 0.7
 loop = true
 tracks/0/type = "value"
@@ -233,7 +236,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=18]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Sprite:frame")
@@ -274,7 +277,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=19]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Sprite:frame")
@@ -315,7 +318,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=20]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -369,7 +372,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=21]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -385,7 +388,7 @@ tracks/0/keys = {
 "values": [ 12, 13, 14, 15, 16, 17 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=22]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -401,11 +404,40 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 9, 10, 11 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=22]
+[sub_resource type="Animation" id=23]
+resource_name = "WalkIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.839216 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="CapsuleShape2D" id=24]
 radius = 2.0
 height = 10.0
 
 [node name="Player" type="KinematicBody2D" groups=[
+"camera_shaker",
 "player",
 ]]
 z_index = 10
@@ -434,14 +466,11 @@ script = ExtResource( 10 )
 [node name="Land" type="Node" parent="StateMachine"]
 script = ExtResource( 11 )
 
-[node name="CarryIdle" type="Node" parent="StateMachine"]
+[node name="Hurt" type="Node" parent="StateMachine"]
 script = ExtResource( 13 )
 
-[node name="CarryWalk" type="Node" parent="StateMachine"]
-script = ExtResource( 14 )
-
-[node name="CarryThrow" type="Node" parent="StateMachine"]
-script = ExtResource( 15 )
+[node name="Timer" type="Timer" parent="StateMachine/Hurt"]
+one_shot = true
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -7 )
@@ -458,9 +487,9 @@ shadow_filter_smooth = 40.0
 material = SubResource( 1 )
 position = Vector2( 1, -8 )
 texture = ExtResource( 1 )
-vframes = 10
+vframes = 11
 hframes = 6
-frame = 56
+frame = 60
 
 [node name="CarryPivot" type="Position2D" parent="Pivot"]
 position = Vector2( 0, -6 )
@@ -509,12 +538,14 @@ anims/FallForwardUp = SubResource( 12 )
 anims/FallMid = SubResource( 13 )
 anims/FallUp = SubResource( 14 )
 anims/Grapple = SubResource( 15 )
-anims/Idle = SubResource( 16 )
-anims/JumpForward = SubResource( 17 )
-anims/JumpUp = SubResource( 18 )
-anims/Land = SubResource( 19 )
-anims/Run = SubResource( 20 )
-anims/Walk = SubResource( 21 )
+anims/Hurt = SubResource( 16 )
+anims/Idle = SubResource( 17 )
+anims/JumpForward = SubResource( 18 )
+anims/JumpUp = SubResource( 19 )
+anims/Land = SubResource( 20 )
+anims/Run = SubResource( 21 )
+anims/Walk = SubResource( 22 )
+anims/WalkIn = SubResource( 23 )
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -535,7 +566,7 @@ collision_mask = 0
 
 [node name="HurtboxCollision" parent="Hurtbox" index="0"]
 position = Vector2( 0, -7 )
-shape = SubResource( 22 )
+shape = SubResource( 24 )
 
 [node name="InteractZone" type="Area2D" parent="."]
 visible = false
@@ -552,11 +583,15 @@ position = Vector2( 0, -6 )
 
 [node name="Head" type="Position2D" parent="."]
 position = Vector2( 1, -11 )
+[connection signal="timeout" from="StateMachine/Hurt/Timer" to="StateMachine/Hurt" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Pivot/HoldTop" to="StateMachine/Fall" method="_on_HoldTop_body_entered"]
 [connection signal="body_exited" from="Pivot/HoldTop" to="StateMachine/Fall" method="_on_HoldTop_body_exited"]
 [connection signal="body_entered" from="Pivot/HoldBottom" to="StateMachine/Fall" method="_on_HoldBottom_body_entered"]
 [connection signal="body_exited" from="Pivot/HoldBottom" to="StateMachine/Fall" method="_on_HoldBottom_body_exited"]
+[connection signal="Hurt" from="Hurtbox" to="." method="_on_Hurtbox_Hurt"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 
 [editable path="Hitbox"]
 

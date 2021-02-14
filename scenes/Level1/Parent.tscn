@@ -1,16 +1,15 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://enemies/bat/Bat.tscn" type="PackedScene" id=1]
 [ext_resource path="res://equippable/throwable/pot/SilverPot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tiles/rockyback/RockyBack.tscn" type="PackedScene" id=3]
 [ext_resource path="res://enemies/snake/Snake.tscn" type="PackedScene" id=4]
 [ext_resource path="res://equippable/throwable/pot/WoodenPot.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ui/UI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://tiles/rockygrass/RockyGrass.tscn" type="PackedScene" id=7]
 [ext_resource path="res://modular/Level1Rooms.tscn" type="PackedScene" id=8]
 [ext_resource path="res://equippable/throwable/pot/GoldPot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://camera/Camera2D.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/Level1/ObjectSpawner.gd" type="Script" id=11]
+[ext_resource path="res://modular/ObjectSpawner.gd" type="Script" id=11]
 [ext_resource path="res://modular/RandomWalker.gd" type="Script" id=12]
 
 [node name="Level" type="Node2D"]
@@ -26,11 +25,7 @@ bbox = Vector2( 5, 4 )
 
 [node name="RockyGrass" parent="RandomRoomWalker" instance=ExtResource( 7 )]
 
-[node name="Camera2D" parent="." instance=ExtResource( 10 )]
-
-[node name="UI" parent="." instance=ExtResource( 6 )]
-
-[node name="ObjectSpawner" type="Node2D" parent="."]
+[node name="ObjectSpawner" type="Node2D" parent="RandomRoomWalker"]
 script = ExtResource( 11 )
 path_room_spawn_multiplier = 0.7
 enemy_spawn_mult = 0.5
@@ -38,6 +33,7 @@ ground_enemies = [ ExtResource( 4 ) ]
 flying_enemies = [ ExtResource( 1 ) ]
 treasures = [ ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 9 ) ]
 next_levels = [ "res://scenes/Level1/Default.tscn", "res://scenes/Level1/Default.tscn", "res://scenes/Level1/Ravine.tscn", "res://scenes/Level1/Deep.tscn", "res://scenes/Level1/TreasureBasic.tscn", "res://scenes/Level1/TreasureDeep.tscn" ]
-[connection signal="level_finalised" from="RandomRoomWalker" to="ObjectSpawner" method="_on_RandomRoomWalker_level_finalised"]
-[connection signal="level_finished" from="RandomRoomWalker" to="Camera2D" method="follow_player"]
+
+[node name="Camera2D" parent="." instance=ExtResource( 10 )]
+[connection signal="level_finished" from="RandomRoomWalker" to="Camera2D" method="setup_camera"]
 [connection signal="player_placed" from="RandomRoomWalker" to="Camera2D" method="set_player"]

@@ -36,7 +36,8 @@ func _physics_process(delta):
 
 
 func _unhandled_input(event):
-	current_state.handle_input(event)
+	if current_state:
+		current_state.handle_input(event)
 
 
 func set_active(value: bool):

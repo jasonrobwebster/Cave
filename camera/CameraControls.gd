@@ -1,19 +1,21 @@
 extends Position2D
 
 export(NodePath) var player_path setget set_player
+export(Rect2) var camera_limits setget set_camera_limits
 
 const LOOK_DISTANCE = 60
 
 var _player: KinematicBody2D
 
-onready var camera = $Camera
-onready var tween = $Tween
-onready var timer = $Timer
+onready var camera := $Camera
+onready var tween := $Tween
+onready var timer := $Timer
 
 
 func _ready():
 	_player = get_node(player_path)
 	follow_player()
+	_set_camera_limits(camera_limits)
 
 
 func _input(event):
@@ -31,10 +33,27 @@ func _input(event):
 		_reset_cam()
 
 
+func setup_camera():
+	follow_player()
+
 
 func set_player(player: NodePath):
 	player_path = player
 	_player = get_node(player_path)
+
+
+func set_camera_limits(value: Rect2):
+	camera_limits = value
+	if camera:
+		_set_camera_limits(value)
+
+
+func _set_camera_limits(value: Rect2):
+	if value:
+		camera.limit_left = value.position.x
+		camera.limit_top = value.position.y
+		camera.limit_right = value.position.x + value.size.x
+		camera.limit_bottom = value.position.y + value.size.y
 
 
 func follow_player():

@@ -9,11 +9,11 @@ region = Rect2( 0, 0, 16, 16 )
 margin = Rect2( 4, -2, 0, 0 )
 filter_clip = true
 
-[node name="WoodenPot" groups=[
-"equipable",
-] instance=ExtResource( 1 )]
-collision_layer = 256
+[node name="WoodenPot" instance=ExtResource( 1 )]
 spawn_chance = 0.8
+
+[node name="Unequipped" parent="StateMachine" index="0"]
+THROW_SPEED = 1000.0
 
 [node name="Equipped" parent="StateMachine" index="1"]
 UI_texture = SubResource( 1 )

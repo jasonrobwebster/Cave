@@ -25,10 +25,7 @@ tracks/0/keys = {
 "values": [ 8, 12, 13, 14, 15 ]
 }
 
-[node name="GoldPot" groups=[
-"equipable",
-] instance=ExtResource( 1 )]
-collision_layer = 256
+[node name="GoldPot" instance=ExtResource( 1 )]
 spawn_chance = 0.1
 value = 1600
 
@@ -37,9 +34,6 @@ UI_texture = SubResource( 1 )
 
 [node name="Sprite" parent="." index="1"]
 frame = 8
-
-[node name="Collision" parent="." index="2"]
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 anims/Shine = SubResource( 2 )
