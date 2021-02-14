@@ -22,6 +22,6 @@ func _get_input_x() -> float:
 	return input_x
 
 
-func _get_input_run(run_multiplier: float = 1.0) -> float:
+func _get_input_run(run_multiplier: float) -> float:
 	var input_run = Input.get_action_strength("run") * run_multiplier + 1.0
 	return input_run

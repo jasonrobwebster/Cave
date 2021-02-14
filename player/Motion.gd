@@ -5,7 +5,7 @@ const MAX_MOVE_SPEED := 64
 const MAX_DECCELERATION := 50
 const JUMP_FORCE := 200
 const COYOTE_TIME := 0.1
-const RUN_MULT := 0.5
+const RUN_MULT := 1.0
 
 var _snap: bool
 
