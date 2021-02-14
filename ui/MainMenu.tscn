@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://interactable/doorways/Doorway.tscn" type="PackedScene" id=1]
 [ext_resource path="res://camera/Camera2D.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://ui/ui_theme.tres" type="Theme" id=8]
 [ext_resource path="res://lights/Torch.tscn" type="PackedScene" id=9]
 [ext_resource path="res://equippable/throwable/pot/WoodenPot.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/PlayerHint.tscn" type="PackedScene" id=11]
 
 [node name="MainMenu" type="Node2D"]
 
@@ -35,6 +36,8 @@ next_level = "res://scenes/Level1/Default.tscn"
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 232, 160 )
+
+[node name="MouseUI" parent="Player" instance=ExtResource( 11 )]
 
 [node name="WoodenPot" parent="." instance=ExtResource( 10 )]
 position = Vector2( 128, 160 )
