@@ -15,6 +15,7 @@ func enter(_previous_state: String = '', _args = null):
 	# handle entering state
 	_direction = sign(pivot.scale.x)
 	timer.start(INIT_TIME)
+	anim_player.play("Slither")
 
 
 func exit():

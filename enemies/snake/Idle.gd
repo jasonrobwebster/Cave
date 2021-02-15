@@ -1,7 +1,7 @@
 extends "res://enemies/snake/SnakeState.gd"
 
 const WANDER_CHANCE := 0.9
-const INIT_TIME := 2
+const INIT_TIME := 1
 const EXTEND_TIME := 0.25
 
 onready var timer: Timer = $Timer
