@@ -2,7 +2,7 @@ extends "res://equippable/Unequiped.gd"
 
 signal thrown_collision()
 
-export(float) var THROW_SPEED = 1000
+var THROW_SPEED = 1000
 
 var _thrown: bool = false
 var _direction: Vector2

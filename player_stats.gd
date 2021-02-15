@@ -2,13 +2,15 @@ extends Node
 
 signal max_health_changed(new_value)
 signal health_changed(new_value)
+signal score_changed(new_value)
 signal equip_changed(new_texture)
 
-export(int) var max_health = 5 setget set_maxhealth
-export(int) var health = 5 setget set_health
-export(Texture) var equip_texture = null setget set_equip
-export(NodePath) var player_path = null setget set_playerpath
+var max_health: int = 5 setget set_maxhealth
+var health: int = 5 setget set_health
+var score: int = 0 setget set_score
 
+var equip_texture: Texture = null setget set_equip
+var player_path: NodePath setget set_playerpath
 var player: Node2D = null setget ,get_player
 
 
@@ -23,6 +25,11 @@ func set_maxhealth(value: int):
 	if health:
 		self.health = health + diff if diff > 0 else health
 	emit_signal("max_health_changed", max_health)
+
+
+func set_score(value: int):
+	score = max(0, value)
+	emit_signal("score_changed", score)
 
 
 func set_equip(value: Texture):

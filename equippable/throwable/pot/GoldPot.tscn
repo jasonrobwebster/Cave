@@ -25,7 +25,10 @@ tracks/0/keys = {
 "values": [ 8, 12, 13, 14, 15 ]
 }
 
-[node name="GoldPot" instance=ExtResource( 1 )]
+[node name="GoldPot" groups=[
+"equipable",
+] instance=ExtResource( 1 )]
+collision_layer = 256
 spawn_chance = 0.1
 value = 1600
 

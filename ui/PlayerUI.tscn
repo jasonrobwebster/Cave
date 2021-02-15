@@ -13,12 +13,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="HP" type="Label" parent="."]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 73.0
-margin_bottom = 29.0
+margin_bottom = 11.0
 text = "HP: 5/5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="."]
+margin_left = 3.0
+margin_top = 13.0
+margin_right = 73.0
+margin_bottom = 21.0
+text = "Score: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
