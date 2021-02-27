@@ -13,6 +13,7 @@ filter_clip = true
 [node name="WoodenPot" instance=ExtResource( 1 )]
 debris_scene = ExtResource( 3 )
 spawn_chance = 0.8
+value = 50
 
 [node name="Equipped" parent="StateMachine" index="1"]
 UI_texture = SubResource( 1 )
