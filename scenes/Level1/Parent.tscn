@@ -12,6 +12,8 @@
 [ext_resource path="res://modular/ObjectSpawner.gd" type="Script" id=11]
 [ext_resource path="res://modular/RandomWalker.gd" type="Script" id=12]
 
+
+
 [node name="Level" type="Node2D"]
 
 [node name="RandomRoomWalker" type="Node2D" parent="."]

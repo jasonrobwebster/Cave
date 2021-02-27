@@ -79,6 +79,8 @@ func _generate_level():
 	_place_background()
 	_fill_empty()
 	emit_signal("tiles_placed")
+	for tm in _tilemaps:
+		_tilemaps[tm].update_bitmask_region()
 	_handle_objectspawn()
 	yield(get_tree().create_timer(0.5), "timeout")
 	emit_signal("level_finished")
