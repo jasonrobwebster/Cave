@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal camera_shake_requested()
+signal player_dead()
 
 onready var state_machine := $StateMachine
 onready var anim_player := $AnimationPlayer
@@ -8,11 +9,14 @@ onready var sprite := $Pivot/Sprite
 onready var center := $Center
 onready var head := $Head
 onready var carry_pivot: Position2D = $Pivot/CarryPivot
+onready var hurt_audio: AudioStreamPlayer = $AudioHurt
 
 
 func _ready():
 	SceneManager.player_path = get_path()
 	PlayerStats.player_path = get_path()
+	state_machine.connect("state_change", SceneManager, "_on_player_change_state")
+	connect("player_dead", PlayerStats, "_on_player_dead")
 
 
 func handle_change_scene():
@@ -40,3 +44,8 @@ func _on_Hurtbox_invincibility_ended():
 func _on_Hurtbox_Hurt(area: Hitbox):
 	if area.get("damage") and state_machine.active:
 		PlayerStats.health -= area.damage
+		hurt_audio.play()
+		if PlayerStats.health <= 0:
+			state_machine.change_state("Dead")
+			state_machine.active = false
+			emit_signal("player_dead")

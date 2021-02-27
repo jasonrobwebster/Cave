@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://equippable/throwable/pot/PotBreak.gd" type="Script" id=1]
+[ext_resource path="res://equippable/throwable/pot/hurt5.wav" type="AudioStream" id=2]
+
+[node name="PotBreak" type="Node2D"]
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "Sfx"
+script = ExtResource( 1 )

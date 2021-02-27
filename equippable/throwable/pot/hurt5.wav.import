@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/hurt5.wav-630621d12f54069018cda8d7e62b7fae.sample"
+
+[deps]
+
+source_file="res://equippable/throwable/pot/hurt5.wav"
+dest_files=[ "res://.import/hurt5.wav-630621d12f54069018cda8d7e62b7fae.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

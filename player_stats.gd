@@ -45,3 +45,21 @@ func set_playerpath(value: NodePath):
 
 func get_player():
 	return player
+
+
+func _on_player_dead():
+	# save player score
+	print("Saving")
+	var file = File.new()
+	var scores: Array = []
+	if file.file_exists(Options.HIGHSCORE_FILE):
+		file.open(Options.HIGHSCORE_FILE, file.READ)
+		var json = JSON.parse(file.get_as_text())
+		if json.error != 0:
+			push_warning("Error loading highscores")
+		scores = json.result as Array
+		file.close()
+	scores.push_back({"name": Options.player_name, "score": score, "date": OS.get_date()})
+	file.open(Options.HIGHSCORE_FILE, file.WRITE)
+	file.store_line(to_json(scores))
+	file.close()

@@ -6,10 +6,14 @@ var paused: bool setget set_paused
 
 onready var paused_panel := $PausedPanel
 onready var options_panel := $OptionsPanel
+onready var quit_button := $PausedPanel/MarginContainer/VBoxContainer/Quit
 
 
 func _ready():
 	visible = false
+	if OS.get_name() == "HTML5":
+		# hide the quit button
+		quit_button.visible = false
 
 
 func set_paused(value: bool):
@@ -50,6 +54,7 @@ func _on_Options_pressed():
 func _on_options_back_button_pressed():
 	options_panel.visible = false
 	paused_panel.visible = true
+	Options.save()
 
 
 func _on_Resume_pressed():

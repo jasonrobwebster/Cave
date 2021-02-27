@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://equippable/throwable/pot/BasePot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://equippable/throwable/pot/pots_sheet.png" type="Texture" id=2]
 [ext_resource path="res://equippable/throwable/pot/GoldAnimation.gd" type="Script" id=3]
+[ext_resource path="res://equippable/throwable/pot/GoldBreak.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -25,10 +26,8 @@ tracks/0/keys = {
 "values": [ 8, 12, 13, 14, 15 ]
 }
 
-[node name="GoldPot" groups=[
-"equipable",
-] instance=ExtResource( 1 )]
-collision_layer = 256
+[node name="GoldPot" instance=ExtResource( 1 )]
+debris_scene = ExtResource( 4 )
 spawn_chance = 0.1
 value = 1600
 

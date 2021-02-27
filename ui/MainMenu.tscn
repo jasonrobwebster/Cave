@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://interactable/doorways/Doorway.tscn" type="PackedScene" id=1]
 [ext_resource path="res://camera/Camera2D.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://equippable/throwable/pot/SilverPot.tscn" type="PackedScene" id=12]
 [ext_resource path="res://equippable/throwable/pot/GoldPot.tscn" type="PackedScene" id=13]
 [ext_resource path="res://ui/MainMenu.gd" type="Script" id=14]
+[ext_resource path="res://ui/Highscores.gd" type="Script" id=15]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource( 14 )
@@ -45,18 +46,12 @@ position = Vector2( 232, 160 )
 
 [node name="GoldPot" parent="." instance=ExtResource( 13 )]
 position = Vector2( 131, 160 )
-equip_type = 2
 
-[node name="SilverPot" parent="." groups=[
-"equipable",
-] instance=ExtResource( 12 )]
+[node name="SilverPot" parent="." instance=ExtResource( 12 )]
 position = Vector2( 158, 160 )
-collision_layer = 256
-equip_type = 2
 
 [node name="WoodenPot" parent="." instance=ExtResource( 10 )]
 position = Vector2( 189, 160 )
-equip_type = 2
 
 [node name="Torches" type="Node2D" parent="."]
 
@@ -73,22 +68,22 @@ position = Vector2( 64, 160 )
 position = Vector2( 56, 72 )
 
 [node name="Torch3" parent="Torches" instance=ExtResource( 9 )]
-position = Vector2( 168, 48 )
+position = Vector2( 163, 48 )
 
 [node name="Torch5" parent="Torches" instance=ExtResource( 9 )]
-position = Vector2( 168, 80 )
+position = Vector2( 163, 80 )
 
 [node name="Torch6" parent="Torches" instance=ExtResource( 9 )]
-position = Vector2( 240, 80 )
+position = Vector2( 245, 80 )
 
 [node name="Torch7" parent="Torches" instance=ExtResource( 9 )]
-position = Vector2( 240, 112 )
+position = Vector2( 245, 112 )
 
 [node name="Torch8" parent="Torches" instance=ExtResource( 9 )]
-position = Vector2( 168, 112 )
+position = Vector2( 163, 112 )
 
 [node name="Torch4" parent="Torches" instance=ExtResource( 9 )]
-position = Vector2( 240, 48 )
+position = Vector2( 245, 48 )
 
 [node name="Control" type="Control" parent="."]
 margin_right = 24.0
@@ -138,43 +133,72 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HighscoreTable" type="VBoxContainer" parent="Control/Highscore"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -36.0
+[node name="GridContainer" type="GridContainer" parent="Control/Highscore"]
 margin_top = 16.0
-margin_right = 36.0
-margin_bottom = 72.0
+margin_right = 72.0
+margin_bottom = 69.0
 mouse_filter = 2
-custom_constants/separation = 6
+columns = 2
+script = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Highscore1" type="Label" parent="Control/Highscore/HighscoreTable"]
+[node name="Label" type="Label" parent="Control/Highscore/GridContainer"]
+margin_right = 62.0
+margin_bottom = 7.0
+size_flags_horizontal = 3
+text = ". . . . ."
+
+[node name="Label2" type="Label" parent="Control/Highscore/GridContainer"]
+margin_left = 66.0
 margin_right = 72.0
 margin_bottom = 7.0
-text = ". . . . . . 0"
-align = 1
+text = "0"
+align = 2
 
-[node name="Highscore2" type="Label" parent="Control/Highscore/HighscoreTable"]
-margin_top = 13.0
-margin_right = 72.0
-margin_bottom = 20.0
-text = ". . . . . . 0"
-align = 1
+[node name="Label3" type="Label" parent="Control/Highscore/GridContainer"]
+margin_top = 11.0
+margin_right = 62.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+text = ". . . . ."
 
-[node name="Highscore3" type="Label" parent="Control/Highscore/HighscoreTable"]
-margin_top = 26.0
+[node name="Label4" type="Label" parent="Control/Highscore/GridContainer"]
+margin_left = 66.0
+margin_top = 11.0
 margin_right = 72.0
-margin_bottom = 33.0
-text = ". . . . . . 0"
-align = 1
+margin_bottom = 18.0
+text = "0"
+align = 2
 
-[node name="Highscore4" type="Label" parent="Control/Highscore/HighscoreTable"]
-margin_top = 39.0
+[node name="Label5" type="Label" parent="Control/Highscore/GridContainer"]
+margin_top = 22.0
+margin_right = 62.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+text = ". . . . ."
+
+[node name="Label6" type="Label" parent="Control/Highscore/GridContainer"]
+margin_left = 66.0
+margin_top = 22.0
 margin_right = 72.0
-margin_bottom = 46.0
-text = ". . . . . . 0"
-align = 1
+margin_bottom = 29.0
+text = "0"
+align = 2
+
+[node name="Label7" type="Label" parent="Control/Highscore/GridContainer"]
+margin_top = 33.0
+margin_right = 62.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = ". . . . ."
+
+[node name="Label8" type="Label" parent="Control/Highscore/GridContainer"]
+margin_left = 66.0
+margin_top = 33.0
+margin_right = 72.0
+margin_bottom = 40.0
+text = "0"
+align = 2
 [connection signal="door_used" from="Doorway" to="." method="_on_Doorway_door_used"]
