@@ -13,6 +13,7 @@ export (float) var circle_radius = 0 setget set_circle_radius
 onready var post_processing := $CanvasLayer/PostProcessing
 onready var tween: Tween = $Tween
 onready var timer: Timer = $Timer
+onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 
 func _physics_process(delta):
@@ -107,4 +108,27 @@ func _on_level_finished():
 	tween_open_radius()
 	yield(tween, "tween_all_completed")
 	self.drawing_circle = false
-	
+
+
+func _on_player_change_state(new_state: Node, previous_state: Node):
+	if new_state.name != "Dead":
+		return
+	# play a death animation
+	tween.stop_all()
+	var player = get_node_or_null(player_path)
+	if player:
+		self.circle_origin = player.global_position
+	self.drawing_circle = true
+	anim_player.play("Death")
+	yield(anim_player, "animation_finished")
+	# go to the main menu
+	get_tree().change_scene(MAIN_MENU_SCENE)
+	yield(get_tree().create_timer(0.5), "timeout")
+	player = get_node_or_null(player_path)
+	if player:
+		self.circle_origin = player.global_position
+	else:
+		self.circle_origin = _get_viewport_center()
+	tween_open_radius()
+	yield(tween, "tween_all_completed")
+	self.drawing_circle = false

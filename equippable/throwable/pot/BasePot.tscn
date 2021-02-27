@@ -10,9 +10,6 @@ radius = 3.0
 [node name="Pot" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
-[node name="Unequipped" parent="StateMachine" index="0"]
-THROW_SPEED = 500.0
-
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -7 )

@@ -1,17 +1,34 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://globals/post.shader" type="Shader" id=1]
 [ext_resource path="res://globals/SceneManager.gd" type="Script" id=2]
+[ext_resource path="res://globals/cave_theme_only_bass_repeated.ogg" type="AudioStream" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
-shader_param/draw_circle = true
+shader_param/draw_circle = false
 shader_param/circle_origin = Vector2( 0, 0 )
 shader_param/circle_radius = 1000.0
-shader_param/global_transform = null
+shader_param/global_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [sub_resource type="ImageTexture" id=2]
 size = Vector2( 1, 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Death"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/PostProcessing:material:shader_param/circle_radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1.2, 1.5 ),
+"transitions": PoolRealArray( 0.757857, 1, 1.6245, 1 ),
+"update": 0,
+"values": [ 400.0, 60.0, 60.0, 0.0 ]
+}
 
 [node name="SceneManager" type="Node2D"]
 pause_mode = 2
@@ -33,3 +50,12 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Death = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -3.0
+autoplay = true
+bus = "Music"

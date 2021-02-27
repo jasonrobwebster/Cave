@@ -12,6 +12,8 @@ export(NodePath) var walls_path
 export(PackedScene) var ModularScene
 export(Vector2) var bbox = Vector2(4, 3)
 
+const WALL_THICKNESS := 10
+
 var start_room: Vector2
 var player_room: Vector2
 var end_room: Vector2
@@ -77,6 +79,8 @@ func _generate_level():
 	_place_background()
 	_fill_empty()
 	emit_signal("tiles_placed")
+	for tm in _tilemaps:
+		_tilemaps[tm].update_bitmask_region()
 	_handle_objectspawn()
 	yield(get_tree().create_timer(0.5), "timeout")
 	emit_signal("level_finished")
@@ -149,8 +153,8 @@ func _place_walls():
 	var y_bottom = _grid_to_tile_map(bbox).y + _rooms.room_size.y
 	
 	# fill top & bottom
-	for y in range(-3, 0):
-		for x in range(-3, x_right + 3):
+	for y in range(-WALL_THICKNESS, 0):
+		for x in range(-WALL_THICKNESS, x_right + WALL_THICKNESS):
 			var top_v := Vector2(x, y)
 			var bot_v := Vector2(x, y_bottom - y - 1)
 			_walls.set_cellv(top_v, _rooms.wall_id)
@@ -158,7 +162,7 @@ func _place_walls():
 	
 	# fill left & right
 	for y in range(0, y_bottom):
-		for x in range(-3, 0):
+		for x in range(-WALL_THICKNESS, 0):
 			var left_v := Vector2(x, y)
 			var right_v := Vector2(x_right - x - 1, y)
 			_walls.set_cellv(left_v, _rooms.wall_id)

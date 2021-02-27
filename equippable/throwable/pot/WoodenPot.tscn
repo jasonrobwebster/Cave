@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://equippable/throwable/pot/BasePot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://equippable/throwable/pot/pots_sheet.png" type="Texture" id=2]
+[ext_resource path="res://equippable/throwable/pot/PotBreak.tscn" type="PackedScene" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -10,10 +11,9 @@ margin = Rect2( 4, -2, 0, 0 )
 filter_clip = true
 
 [node name="WoodenPot" instance=ExtResource( 1 )]
+debris_scene = ExtResource( 3 )
 spawn_chance = 0.8
-
-[node name="Unequipped" parent="StateMachine" index="0"]
-THROW_SPEED = 1000.0
+value = 50
 
 [node name="Equipped" parent="StateMachine" index="1"]
 UI_texture = SubResource( 1 )

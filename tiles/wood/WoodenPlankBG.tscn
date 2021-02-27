@@ -5,6 +5,7 @@
 [node name="WoodenPlankBG" type="TileMap" groups=[
 "environment",
 ]]
+z_index = -9
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1

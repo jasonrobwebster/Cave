@@ -3,8 +3,12 @@ extends "res://player/Motion.gd"
 const ACCELERATION := 5
 const FRICTION := 0
 
+onready var audio_jump := $AudioJump
+
+
 func enter(previous_state: String = '', v: Vector2 = Vector2.ZERO):
 	velocity = v
+	audio_jump.play()
 	match previous_state:
 		'Idle':
 			anim_player.play("JumpUp")

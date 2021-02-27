@@ -167,7 +167,6 @@ func _place_doorway(empty_points: Array):
 	var next_room = next_rooms[_rng.randi() % len(next_rooms)]
 	var door = _doorway.instance()
 	door.next_level = next_level
-	door.next_room = next_room
 	door.global_position = door_point + _tile_size.project(Vector2.UP) / 2
 	add_child(door)
 
