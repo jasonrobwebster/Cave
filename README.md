@@ -12,7 +12,10 @@ For use with the [Godot engine](https://godotengine.org/). Built with Godot 3.2.
 - Finite state machine implementations for AI and player movement
 - Player UI
 - Pause screen with persistent options settings
+- Scene transition shaders
 - Many bugs
 
 # External links
 A playable version of the game can be downloaded on [itch.io](https://jrberyllium.itch.io/cave).
+
+I wrote down the lessons I learnt from the making of this game [here](https://www.notion.so/Lessons-from-my-first-medium-sized-game-dev-project-58e7dd7129b74075b98b3b2b3f588824).
