@@ -18,4 +18,4 @@ For use with the [Godot engine](https://godotengine.org/). Built with Godot 3.2.
 # External links
 A playable version of the game can be downloaded on [itch.io](https://jrberyllium.itch.io/cave).
 
-I also took some time writing a bit of a post-mortem [here](https://www.notion.so/Lessons-from-my-first-medium-sized-game-dev-project-58e7dd7129b74075b98b3b2b3f588824).
+I also took some time writing a bit of a post-mortem on the game, and the lessons learnt from my first medium sized game project [here](https://www.notion.so/Lessons-from-my-first-medium-sized-game-dev-project-58e7dd7129b74075b98b3b2b3f588824).
